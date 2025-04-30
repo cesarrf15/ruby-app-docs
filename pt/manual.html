@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
+
+    <!-- Adicione isso no <head> de todas as páginas -->
+    <script>
+        // Fallback imediato para evitar flash branco
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+            
+            document.documentElement.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
+            document.documentElement.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
+        })();
+    </script>
+
+
+
+
+    
     <meta charset="UTF-8">
     <title>Manual do Usuário | Ruby Pressure Calculator</title>
    
