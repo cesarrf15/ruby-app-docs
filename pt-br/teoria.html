@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoria - Ruby Pressure Calculator</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+    <header class="header">
+        <a href="/pt-br/" class="back-button">← Voltar</a>
+        <h1>Fundamentos Teóricos</h1>
+    </header>
 
+    <main class="content">
+        <article>
+            <h2 id="principio">Princípio da Luminescência do Rubi</h2>
+            <img src="/assets/img/diagrams/ruby-cell.svg" alt="Diagrama de célula de rubi" class="diagram">
+            <p>O método baseia-se no desvio da linha R1 do rubi (Cr³⁺ em Al₂O₃) sob pressão...</p>
+
+            <h2 id="equacoes">Equações Fundamentais</h2>
+            <div class="equation" id="main-equation">
+                $$ \lambda_p = \lambda_0 \left(1 + \frac{7.665 \cdot P}{1904}\right)^{1/7.665} $$
+            </div>
+            <p>Onde:</p>
+            <ul>
+                <li>λₚ: Comprimento de onda sob pressão (nm)</li>
+                <li>λ₀: Comprimento de onda a pressão zero (694.22 nm)</li>
+                <li>P: Pressão em GPa</li>
+            </ul>
+
+            <section id="referencias" class="references">
+                <h3>Referências Bibliográficas</h3>
+                <ol>
+                    <li>Mao, H.K., et al. (1986). "Calibration of the ruby pressure gauge..." J. Geophys. Res.</li>
+                    <li>Dewaele, A., et al. (2008). "Quasihydrostatic equation of state..." Phys. Rev. B</li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <script src="/assets/js/app.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
