@@ -1,56 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-    <!-- Adicione isso no <head> de todas as páginas -->
-        <script>
-    // Fallback imediato para evitar flash branco
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
-        
-        document.documentElement.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
-        document.documentElement.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
-        })();
-        </script>
-
-        <script>
-        // Pré-configuração imediata do tema
-        (function() {
-            // 1. Define variáveis CSS imediatamente
-            const savedTheme = localStorage.getItem('theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
-            
-            document.documentElement.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
-            document.documentElement.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
-            
-            // 2. Marca o HTML para evitar flash
-            document.documentElement.classList.toggle('dark-mode', isDark);
-            document.documentElement.classList.add('theme-loaded');
-            
-            // 3. Força repaint
-            setTimeout(() => {
-                document.documentElement.style.visibility = 'visible';
-            }, 10);
-            })();
-        </script>
-
-
-    
-
-
-
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruby Pressure Calculator - Documentação</title>
-    
-     <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
-     <script src="/ruby-app-docs/assets/js/app.js" defer></script>
-    
-    <meta name="description" content="Documentação completa do aplicativo Ruby Pressure Calculator para calibração por luminescência do rubi">
+<meta charset="UTF-8">
+    <title>Manual do Usuário | Ruby Pressure Calculator</title>
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
+    <script src="/ruby-app-docs/assets/js/app.js" defer></script>
 </head>
 <body>
 
