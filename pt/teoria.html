@@ -17,6 +17,35 @@
     </script>
 
 
+    <script>
+    // Pré-configuração imediata do tema
+    (function() {
+        // 1. Define variáveis CSS imediatamente
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+        
+        document.documentElement.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
+        document.documentElement.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
+        
+        // 2. Marca o HTML para evitar flash
+        document.documentElement.classList.toggle('dark-mode', isDark);
+        document.documentElement.classList.add('theme-loaded');
+        
+        // 3. Força repaint
+        setTimeout(() => {
+            document.documentElement.style.visibility = 'visible';
+        }, 10);
+        })();
+    </script>
+
+
+
+
+
+    
+
+
 
     
     <meta charset="UTF-8">
