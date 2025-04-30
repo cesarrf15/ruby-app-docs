@@ -1,10 +1,31 @@
 // Configurações gerais
 document.addEventListener('DOMContentLoaded', function() {
-    // Controle do tema claro/escuro
-    const themeToggle = document.createElement('button');
-    themeToggle.id = 'theme-toggle';
-    themeToggle.textContent = '🌓';
-    document.body.prepend(themeToggle);
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Verifica preferência salva ou do sistema
+    const currentTheme = localStorage.getItem('theme') || 
+                        (prefersDark.matches ? 'dark' : 'light');
+    
+    // Botão de alternância
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateToggleIcon(isDark);
+    });
+    
+    // Atualiza ícone inicial
+    updateToggleIcon(currentTheme === 'dark');
+    
+    // Observa mudanças no sistema
+    prefersDark.addListener(e => {
+        if (!localStorage.getItem('theme')) {
+            document.body.classList.toggle('dark-mode', e.matches);
+            updateToggleIcon(e.matches);
+        }
+    });
 
     // Verifica preferência do usuário
     if (localStorage.getItem('theme') === 'dark' || 
@@ -58,6 +79,14 @@ function renderMathEquations() {
         MathJax.typesetPromise();
     }
 }
+
+function updateToggleIcon(isDark) {
+    const icon = document.getElementById('theme-toggle');
+    icon.textContent = isDark ? '☀️' : '🌙';
+    icon.setAttribute('aria-label', isDark ? 'Light mode' : 'Dark mode');
+}
+
+
 
 // Exporta funções para uso global
 window.app = {
