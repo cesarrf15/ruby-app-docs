@@ -22,10 +22,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function applyTheme(isDark) {
+    // Aplica classe ao body
     document.body.classList.toggle('dark-mode', isDark);
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    // Atualiza todas as variáveis CSS
+    const root = document.documentElement;
+    root.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
+    root.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
+    root.style.setProperty('--card-bg', isDark ? '#1e1e1e' : '#f9f9f9');
+    
+    // Atualiza MathJax
+    if (window.MathJax) {
+        MathJax.typesetPromise().then(() => {
+            document.querySelectorAll('.mjx-chtml').forEach(el => {
+                el.style.color = isDark ? '#f0f0f0' : '#333333';
+            });
+        });
+    }
+    
+    // Atualiza ícone
     updateThemeIcon(isDark);
-    updateMathJaxColors(isDark);
 }
 
 function toggleTheme() {
