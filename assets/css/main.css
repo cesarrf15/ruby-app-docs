@@ -143,4 +143,12 @@ body {
     }
 }
 
+@media (max-width: 767px) {
+    #theme-toggle {
+        font-size: 2rem; /* Ícone maior */
+        top: 15px;
+        right: 15px;
+    }
+}
+
 
