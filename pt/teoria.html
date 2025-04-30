@@ -1,61 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-
-    <!-- Adicione isso no <head> de todas as páginas -->
-    <script>
-        // Fallback imediato para evitar flash branco
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
-            
-            document.documentElement.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
-            document.documentElement.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
-        })();
-    </script>
-
-
-    <script>
-    // Pré-configuração imediata do tema
-    (function() {
-        // 1. Define variáveis CSS imediatamente
-        const savedTheme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
-        
-        document.documentElement.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
-        document.documentElement.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
-        
-        // 2. Marca o HTML para evitar flash
-        document.documentElement.classList.toggle('dark-mode', isDark);
-        document.documentElement.classList.add('theme-loaded');
-        
-        // 3. Força repaint
-        setTimeout(() => {
-            document.documentElement.style.visibility = 'visible';
-        }, 10);
-        })();
-    </script>
-
-
-
-
-
-    
-
-
-
-    
     <meta charset="UTF-8">
-    <title>Fundamentos Teóricos | Ruby Pressure Calculator</title>
+    <title>Manual do Usuário | Ruby Pressure Calculator</title>
     <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="/ruby-app-docs/assets/js/app.js" defer></script>
-
-    
 </head>
 <body>
 
