@@ -106,3 +106,26 @@ body:not([lang="en"]) [lang="en"] {
     display: none;
 }
 
+/* Ajuste responsivo para texto */
+body {
+    font-size: 1rem; /* Tamanho base */
+}
+
+@media (min-width: 768px) { /* Tablets/notebooks */
+    body {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 1200px) { /* Telas grandes */
+    body {
+        font-size: 1.2rem;
+    }
+}
+
+
