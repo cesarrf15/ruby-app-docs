@@ -151,4 +151,14 @@ body {
     }
 }
 
+/* Estilos para MathJax */
+.mjx-chtml {
+    color: var(--text-color) !important;
+    fill: var(--text-color) !important;
+}
+
+.dark-mode .mjx-chtml {
+    opacity: 0.9; /* Aumenta contraste no dark mode */
+}
+
 
