@@ -1,29 +1,33 @@
 // Configurações gerais
 document.addEventListener('DOMContentLoaded', function() {
 
+       // Sistema de tema
     const themeToggle = document.getElementById('theme-toggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     
-    // Verifica preferência salva ou do sistema
-    const currentTheme = localStorage.getItem('theme') || 
-                        (prefersDark.matches ? 'dark' : 'light');
+    function applyTheme(isDark) {
+        document.body.classList.toggle('dark-mode', isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    // Verifica preferência
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = prefersDark.matches;
+    const initialTheme = savedTheme ? savedTheme === 'dark' : systemPrefersDark;
     
+    applyTheme(initialTheme);
+
     // Botão de alternância
     themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateToggleIcon(isDark);
+        const isDark = !document.body.classList.contains('dark-mode');
+        applyTheme(isDark);
     });
-    
-    // Atualiza ícone inicial
-    updateToggleIcon(currentTheme === 'dark');
-    
+
     // Observa mudanças no sistema
     prefersDark.addListener(e => {
         if (!localStorage.getItem('theme')) {
-            document.body.classList.toggle('dark-mode', e.matches);
-            updateToggleIcon(e.matches);
+            applyTheme(e.matches);
         }
     });
 
