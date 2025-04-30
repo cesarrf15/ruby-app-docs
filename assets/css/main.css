@@ -161,4 +161,19 @@ body {
     opacity: 0.9; /* Aumenta contraste no dark mode */
 }
 
+.image-container {
+    position: relative;
+    min-height: 300px; /* Altura aproximada da imagem */
+    background: var(--card-bg);
+}
+
+.screenshot {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.screenshot.loaded {
+    opacity: 1;
+}
+
 
