@@ -2,23 +2,62 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual - Ruby Pressure Calculator</title>
+    <title>Manual do Usuário | Ruby Pressure Calculator</title>
     <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-    <article class="manual">
-        <h1>Guia Prático</h1>
-        
-        <section id="main-screen">
-            <h2>Tela Principal</h2>
-            <img src="/assets/img/screenshots/main-screen.webp" 
-                 alt="Tela principal do aplicativo"
-                 loading="lazy">
-            <p>Selecione o modo de conversão desejado...</p>
-        </section>
+    <header class="header">
+        <div class="container">
+            <h1>Manual do Usuário</h1>
+            <nav class="breadcrumb">
+                <a href="/pt/">Início</a> > <a href="/pt/manual.html">Manual</a>
+            </nav>
+        </div>
+    </header>
 
-        <!-- Mais seções... -->
-    </article>
+    <main class="container manual">
+        <article>
+            <section id="introducao">
+                <h2>1. Introdução</h2>
+                <p>Este aplicativo calcula pressões em células de bigorna de diamante (DAC) através da técnica de calibração por rubi.</p>
+            </section>
+
+            <section id="modos-operacao">
+                <h2>2. Modos de Operação</h2>
+                
+                <div class="feature">
+                    <h3>2.1 Pressão → Número de Onda</h3>
+                    <img src="/assets/img/screenshots/pressure-to-wave.webp" 
+                         alt="Tela de conversão Pressão para Número de Onda"
+                         loading="lazy">
+                    <ol class="steps">
+                        <li>Selecione o comprimento de onda do laser (ex: 514.5nm)</li>
+                        <li>Insira o valor da pressão em GPa</li>
+                        <li>O resultado será calculado automaticamente</li>
+                    </ol>
+                </div>
+
+                <div class="feature">
+                    <h3>2.2 Número de Onda → Pressão</h3>
+                    <ol class="steps">
+                        <li>Toque no botão de troca (↔) para alternar o modo</li>
+                        <li>Insira o deslocamento em cm⁻¹</li>
+                        <li>A pressão equivalente será exibida</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="ajustes">
+                <h2>3. Ajustes Avançados</h2>
+                <div class="warning">
+                    <p>⚠️ Ajuste de offset só deve ser feito por usuários experientes</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <!-- Rodapé consistente -->
+    </footer>
 </body>
 </html>
