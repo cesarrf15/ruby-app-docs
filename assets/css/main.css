@@ -62,3 +62,23 @@ body {
     z-index: 100;
 }
 
+
+/* Adicione ao seu main.css */
+.language-notice {
+    background: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.9em;
+}
+
+[lang] {
+    transition: all 0.3s ease;
+}
+
+/* Esconde elementos de outros idiomas */
+body:not([lang="pt"]) [lang="pt"],
+body:not([lang="en"]) [lang="en"] {
+    display: none;
+}
+
