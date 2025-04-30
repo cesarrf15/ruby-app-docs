@@ -176,4 +176,24 @@ body {
     opacity: 1;
 }
 
+/* Garante contraste em ambos os temas */
+.mjx-chtml {
+    color: var(--text-color) !important;
+    fill: var(--text-color) !important;
+    opacity: 1 !important;
+}
+
+.dark-mode .mjx-chtml {
+    filter: contrast(1.2) brightness(1.1);
+}
+
+/* Container especial para equações */
+.equation-container {
+    padding: 1.5rem;
+    margin: 2rem 0;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
 
