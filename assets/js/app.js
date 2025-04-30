@@ -5,11 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     
-    function applyTheme(isDark) {
-        document.body.classList.toggle('dark-mode', isDark);
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    // Substitua a função applyTheme por:
+function applyTheme(isDark) {
+    document.body.classList.toggle('dark-mode', isDark);
+    document.documentElement.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
+    document.documentElement.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.setAttribute('aria-label', isDark ? 'Modo claro' : 'Modo escuro');
+    
+    // Força redesenho das equações MathJax
+    if (window.MathJax) {
+        MathJax.typesetPromise();
     }
+}
 
     // Verifica preferência
     const savedTheme = localStorage.getItem('theme');
