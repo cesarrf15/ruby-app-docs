@@ -1,1 +1,19 @@
-
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Eixos -->
+  <line x1="50" y1="250" x2="350" y2="250" stroke="#333" stroke-width="2"/>
+  <line x1="50" y1="250" x2="50" y2="50" stroke="#333" stroke-width="2"/>
+  
+  <!-- Rótulos -->
+  <text x="200" y="280" text-anchor="middle" font-size="12">Pressão (GPa)</text>
+  <text x="20" y="150" text-anchor="middle" font-size="12" transform="rotate(-90,20,150)">Δλ (nm)</text>
+  
+  <!-- Curva de calibração -->
+  <path d="M 50 250 C 100 200, 200 150, 350 100" 
+        stroke="#9b111e" 
+        stroke-width="3" 
+        fill="none"/>
+  
+  <!-- Pontos de referência -->
+  <circle cx="50" cy="250" r="5" fill="#9b111e"/>
+  <circle cx="350" cy="100" r="5" fill="#9b111e"/>
+</svg>
