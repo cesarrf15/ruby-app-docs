@@ -1,3 +1,53 @@
+
+// Sistema de Tema Global
+class ThemeSystem {
+    static init() {
+        // 1. Configura tema inicial
+        this.applyTheme(this.getSavedTheme());
+        
+        // 2. Configura botões em todas as páginas
+        this.setupThemeButtons();
+        
+        // 3. Sincronização entre abas
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'theme') this.applyTheme(e.newValue === 'dark');
+        });
+    }
+
+    static getSavedTheme() {
+        const saved = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return saved || (systemDark ? 'dark' : 'light');
+    }
+
+    static applyTheme(isDark) {
+        // Aplica ao documento
+        document.documentElement.classList.toggle('dark-mode', isDark);
+        
+        // Atualiza ícones em TODAS as páginas
+        document.querySelectorAll('.theme-icon').forEach(icon => {
+            icon.textContent = isDark ? '☀️' : '🌙';
+        });
+        
+        // Salva preferência
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    static setupThemeButtons() {
+        document.querySelectorAll('.theme-toggle').forEach(button => {
+            button.style.display = 'block';
+            button.addEventListener('click', () => {
+                const current = document.documentElement.classList.contains('dark-mode');
+                this.applyTheme(!current);
+            });
+        });
+    }
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => ThemeSystem.init());
+
+
 // TemaManager - Controle centralizado do tema
 const ThemeManager = {
     init() {
