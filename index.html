@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=/pt-br/">
     <script>
-        const lang = navigator.language.startsWith('pt') ? 'pt-br' : 'en';
-        window.location.href = `/${lang}/`;
+        // Detecta o idioma do navegador ou do app
+        const lang = localStorage.getItem('appLanguage') || 
+                     navigator.language.split('-')[0] || 
+                     'pt';
+        
+        // Redireciona para a versão correta
+        if (lang === 'pt') {
+            window.location.href = '/pt/index.html';
+        } else {
+            window.location.href = '/en/index.html'; // Fallback para inglês
+        }
     </script>
-    <title>Redirecting...</title>
 </head>
 <body>
-    <p>Redirecting to your language...</p>
+    <p>Redirecionando para o idioma apropriado...</p>
 </body>
 </html>
