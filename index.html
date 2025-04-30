@@ -14,6 +14,12 @@
             window.location.href = '/en/index.html'; // Fallback para inglês
         }
     </script>
+
+    <script>
+    const lang = navigator.language.startsWith('pt') ? 'pt' : 'en';
+    window.location.href = `/ruby-app-docs/${lang}/index.html`;
+    </script>
+    
 </head>
 <body>
     <p>Redirecionando para o idioma apropriado...</p>
