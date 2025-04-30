@@ -1,11 +1,32 @@
 :root {
+    /* Cores Light Mode (padrão) */
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --card-bg: #f9f9f9;
+    --border-color: #dddddd;
     --ruby-red: #9b111e;
+    
+    /* Cores Dark Mode */
     --dark-bg: #121212;
+    --dark-text: #f0f0f0;
+    --dark-card: #1e1e1e;
+    --dark-border: #444444;
 }
-
+/* Aplicação padrão (Light Mode) */
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Dark Mode via classe */
+body.dark-mode {
+    --bg-color: var(--dark-bg);
+    --text-color: var(--dark-text);
+    --card-bg: var(--dark-card);
+    --border-color: var(--dark-border);
 }
 
 .manual img {
@@ -28,12 +49,15 @@ body {
     --card-bg: #1e1e1e;
 }
 
-.equation {
-    margin: 2rem 0;
-    padding: 1rem;
-    background-color: var(--card-bg, #f9f9f9);
-    border-radius: 8px;
-    overflow-x: auto;
+
+/* Componentes que usam as variáveis */
+.card, .equation {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+img {
+    border-color: var(--border-color);
 }
 
 .diagram {
