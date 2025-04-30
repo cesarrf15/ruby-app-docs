@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('dark-mode');
     }
 
+    // Armazena o idioma preferido
+    if (!localStorage.getItem('appLanguage')) {
+        localStorage.setItem('appLanguage', 
+            navigator.language.startsWith('pt') ? 'pt' : 'en');
+    }    
+
     // Alternar tema
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
