@@ -1,1 +1,18 @@
-
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Célula DAC -->
+  <circle cx="150" cy="150" r="100" fill="#ddd" stroke="#555" stroke-width="2"/>
+  
+  <!-- Amostra de rubi -->
+  <circle cx="150" cy="150" r="30" fill="#9b111e" opacity="0.8">
+    <animate attributeName="r" values="30;35;30" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Bigornas -->
+  <rect x="145" y="30" width="10" height="90" fill="#aaa"/>
+  <rect x="145" y="180" width="10" height="90" fill="#aaa"/>
+  
+  <!-- Laser -->
+  <line x1="300" y1="150" x2="220" y2="150" stroke="#0066cc" stroke-width="3" stroke-dasharray="5,3">
+    <animate attributeName="stroke-dashoffset" values="0;100" dur="2s" repeatCount="indefinite"/>
+  </line>
+</svg>
