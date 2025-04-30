@@ -5,7 +5,15 @@
     <title>Manual do Usuário | Ruby Pressure Calculator</title>
     <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
 </head>
-<body>
+    <body>
+        
+        <button id="theme-toggle" aria-label="Alternar tema" style="display: none;">🌙</button>
+<script>
+    // Garante que o botão só aparece quando o JS carregar
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('theme-toggle').style.display = 'block';
+    });
+</script>
     <header class="header">
         <div class="container">
             <h1>Manual do Usuário</h1>
