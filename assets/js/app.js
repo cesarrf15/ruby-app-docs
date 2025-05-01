@@ -59,9 +59,9 @@ class ThemeManager {
         console.log(`Aplicando tema: ${isDark ? 'dark' : 'light'}`); // ← Adicione esta linha
 
         // Notifica a galeria para atualizar
-        document.dispatchEvent(new CustomEvent('themeChanged', {
-        detail: { isDark }
-        }));
+        //document.dispatchEvent(new CustomEvent('themeChanged', {
+        //detail: { isDark }
+        //}));
         
     }
 
