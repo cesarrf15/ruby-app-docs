@@ -36,11 +36,7 @@ class ThemeManager {
         this.applyTheme(initialTheme === 'dark');
     }
 
-    static applyTheme(isDark) {
-
-        // Dispara evento para o MathJax
-        const event = new CustomEvent('themeChanged');
-        document.dispatchEvent(event);
+    static applyTheme(isDark) {       
         
         // Aplica classes
         document.documentElement.classList.toggle('dark-mode', isDark);
