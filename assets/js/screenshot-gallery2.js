@@ -1,49 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("[GALERIA] Iniciando...");
+    console.log('Galeria iniciada - Carregando imagens...');
 
-    const IMAGE_MANIFEST = {
-        'main-activity': ['full.webp']
-    };
+    // Configuração direta
+    const gallery = document.querySelector('.screenshot-gallery');
+    const imgElement = document.createElement('img');
+    imgElement.style.maxWidth = '100%';
+    imgElement.style.border = '2px solid var(--ruby-red)';
+    gallery.appendChild(imgElement);
 
-    // Sistema de fallback
-    const loadImage = (theme) => {
-        const imgUrl = `/ruby-app-docs/assets/img/screenshots/main-activity/${theme}/full.webp?t=${Date.now()}`;
-        console.log(`[GALERIA] Carregando: ${imgUrl}`);
-        
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => resolve(imgUrl);
-            img.onerror = () => {
-                console.warn(`[GALERIA] Fallback para tema ${theme === 'dark' ? 'light' : 'dark'}`);
-                resolve(`/ruby-app-docs/assets/img/screenshots/main-activity/${
-                    theme === 'dark' ? 'light' : 'dark'}/full.webp?t=${Date.now()}`);
-            };
-            img.src = imgUrl;
-        });
-    };
-
-    // Renderização
-    const updateGallery = async () => {
+    // Função para atualizar imagem
+    const updateImage = () => {
         const isDark = document.documentElement.classList.contains('dark-mode');
         const theme = isDark ? 'dark' : 'light';
-        console.log(`[GALERIA] Atualizando para tema: ${theme}`);
+        const imgPath = `/ruby-app-docs/assets/img/screenshots/main-activity/${theme}/full.webp?nocache=${Date.now()}`;
         
-        const imgUrl = await loadImage(theme);
-        const gallery = document.querySelector('.screenshot-gallery');
-        
-        gallery.innerHTML = `
-            <img src="${imgUrl}" 
-                 alt="Tela ${theme}"
-                 style="max-width:100%; border:2px solid var(--ruby-red)">
-        `;
+        console.log(`Tentando carregar: ${imgPath}`);
+        imgElement.src = imgPath;
+        imgElement.alt = `Tela ${theme}`;
     };
 
-    // Listeners
-    document.addEventListener('themeChanged', (e) => {
-        console.log('[GALERIA] Evento recebido', e.detail);
-        updateGallery();
+    // Observador de tema
+    const themeObserver = new MutationObserver(() => {
+        console.log('Classe dark-mode alterada');
+        updateImage();
     });
 
-    // Inicialização
-    updateGallery();
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+
+    // Evento customizado (backup)
+    document.addEventListener('themeChanged', updateImage);
+
+    // Carregamento inicial
+    updateImage();
 });
