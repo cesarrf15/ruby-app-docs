@@ -1,48 +1,58 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Mapeamento das imagens por seção (substitua com seus arquivos reais)
-    const IMAGE_MANIFEST = {
-        'main-activity': [
-            'full.webp',
-            'controls.webp',
-            'modes.webp'
-        ],
-        'pressure-to-wavenumber': [
-            'default.webp',
-            'calculation.webp'
-        ],
-        'wavenumber-to-pressure': [
-            'normal.webp',
-            '785nm.webp'
-        ]
-    };
+// Versão 1: Formato Classe (Recomendado)
+class ScreenshotGallery {
+    constructor() {
+        this.manifest = {
+            'main-activity': ['full.webp', 'controls.webp'],
+            'pressure-to-wavenumber': ['calculation.webp'],
+            'wavenumber-to-pressure': ['785nm.webp']
+        };
+    }
 
-    // Cria as galerias baseadas no manifest
-    document.querySelectorAll('.screenshot-gallery').forEach(gallery => {
+    init() {
+        this.setupThemeListener();
+        this.renderAllGalleries();
+    }
+
+    renderAllGalleries() {
+        document.querySelectorAll('.screenshot-gallery').forEach(gallery => {
+            this.renderGallery(gallery);
+        });
+    }
+
+    renderGallery(gallery) {
         const folder = gallery.dataset.folder;
         const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-        
-        if (IMAGE_MANIFEST[folder]) {
+
+        if (this.manifest[folder]) {
             gallery.innerHTML = `
                 <div class="gallery-grid">
-                    ${IMAGE_MANIFEST[folder].map(img => `
+                    ${this.manifest[folder].map(img => `
                         <figure>
                             <img src="/ruby-app-docs/assets/img/screenshots/${folder}/${theme}/${img}" 
                                  alt="${folder.replace('-', ' ')} - ${img.replace('.webp', '')}"
                                  loading="lazy">
-                            <figcaption>${formatCaption(img)}</figcaption>
+                            <figcaption>${this.formatCaption(img)}</figcaption>
                         </figure>
                     `).join('')}
                 </div>
             `;
-        } else {
-            gallery.innerHTML = `<p class="error">Seção "${folder}" não encontrada</p>`;
         }
-    });
-
-    function formatCaption(filename) {
-        return filename
-            .replace('.webp', '')
-            .replace(/-/g, ' ')
-            .replace(/\b\w/g, l => l.toUpperCase());
     }
+
+    setupThemeListener() {
+        document.addEventListener('themeChanged', () => {
+            this.renderAllGalleries();
+        });
+    }
+
+    formatCaption(filename) {
+        return filename.replace('.webp', '')
+                      .replace(/-/g, ' ')
+                      .replace(/\b\w/g, l => l.toUpperCase());
+    }
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    new ScreenshotGallery().init();
 });
