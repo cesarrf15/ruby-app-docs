@@ -1,26 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Configuração
+    console.log("[GALERIA] Iniciando...");
+
     const IMAGE_MANIFEST = {
         'main-activity': ['full.webp']
     };
 
-    // Elementos da DOM
-    const galleryContainer = document.querySelector('.screenshot-gallery');
-    let currentImgElement = null;
+    // Sistema de fallback
+    const loadImage = (theme) => {
+        const imgUrl = `/ruby-app-docs/assets/img/screenshots/main-activity/${theme}/full.webp?t=${Date.now()}`;
+        console.log(`[GALERIA] Carregando: ${imgUrl}`);
+        
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(imgUrl);
+            img.onerror = () => {
+                console.warn(`[GALERIA] Fallback para tema ${theme === 'dark' ? 'light' : 'dark'}`);
+                resolve(`/ruby-app-docs/assets/img/screenshots/main-activity/${
+                    theme === 'dark' ? 'light' : 'dark'}/full.webp?t=${Date.now()}`);
+            };
+            img.src = imgUrl;
+        });
+    };
 
-    // Função principal
-    function updateGalleryImage() {
+    // Renderização
+    const updateGallery = async () => {
         const isDark = document.documentElement.classList.contains('dark-mode');
         const theme = isDark ? 'dark' : 'light';
-        const folder = 'main-activity';
-        const imgName = 'full.webp';
-        const newSrc = `/ruby-app-docs/assets/img/screenshots/${folder}/${theme}/${imgName}?v=${Date.now()}`;
+        console.log(`[GALERIA] Atualizando para tema: ${theme}`);
+        
+        const imgUrl = await loadImage(theme);
+        const gallery = document.querySelector('.screenshot-gallery');
+        
+        gallery.innerHTML = `
+            <img src="${imgUrl}" 
+                 alt="Tela ${theme}"
+                 style="max-width:100%; border:2px solid var(--ruby-red)">
+        `;
+    };
 
-        // Se a imagem já existe, apenas atualize o src
-        if (currentImgElement) {
-            currentImgElement.src = newSrc;
-        } 
-        // Se não existe, crie a imagem
-        else {
-            currentImgElement = document.createElement('img');
-            currentImgElement.alt = `Tela ${theme
+    // Listeners
+    document.addEventListener('themeChanged', (e) => {
+        console.log('[GALERIA] Evento recebido', e.detail);
+        updateGallery();
+    });
+
+    // Inicialização
+    updateGallery();
+});
