@@ -55,6 +55,50 @@
             font-weight: 600;
         }
     </style>
+
+    <!-- Adicione este estilo -->
+    <style>
+        :root {
+            --light-display: block;
+            --dark-display: none;
+        }
+        .dark-mode {
+            --light-display: none;
+            --dark-display: block;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .dark-mode .theme-toggle {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .theme-icon {
+            font-size: 1.2rem;
+        }
+        .theme-sensitive-img {
+            transition: opacity 0.4s ease;
+        }
+        .theme-sensitive-img[data-theme="light"] {
+            display: var(--light-display);
+        }
+        .theme-sensitive-img[data-theme="dark"] {
+            display: var(--dark-display);
+        }
+    </style>
+    
 </head>
 
 <body class="index-page">
