@@ -1,85 +1,175 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-    <!-- ADICIONE ESTE SCRIPT COMO PRIMEIRO ELEMENTO DENTRO DO <head> -->
+    <!-- Controle de Tema Avançado -->
     <script>
-        // Aplicação ULTRA-RÁPIDA do tema antes de qualquer renderização
         (function(){
             const savedTheme = localStorage.getItem('theme');
             const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
             
-            // Aplica as variáveis CSS instantaneamente
-            const root = document.documentElement;
-            root.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
-            root.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
-            
-            // Marca o tema no HTML antes da renderização
-            if (isDark) root.classList.add('dark-mode');
-            
-            // Esconde temporariamente para evitar flash
-            root.style.visibility = 'hidden';
-            setTimeout(() => root.style.visibility = '', 50);
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            window.currentTheme = isDark ? 'dark' : 'light';
         })();
     </script>
-    
-    <meta charset="UTF-8">
-    <title>Manual do Usuário | Ruby Pressure Calculator</title>
-    <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
-    <script src="/ruby-app-docs/assets/js/app.js" defer></script>
-</head>
-<body>
 
-    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema" style="display: none;">
-    <span id="theme-icon" class="theme-icon">🌙</span>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby Pressure Calculator</title>
+    
+    <!-- SEO e Metadados -->
+    <meta name="description" content="Aplicativo para conversão precisa entre pressão hidrostática e número de onda Raman usando calibração por rubi">
+    <meta name="keywords" content="ruby pressure, cálculo DAC, espectroscopia Raman, alta pressão">
+    
+    <!-- Pré-carregamentos -->
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <link rel="preload" href="assets/js/app.js" as="script">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/favicon.ico" sizes="any">
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+</head>
+
+<body class="index-page">
+    <!-- Botão de Tema Acessível -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+        <span id="theme-icon" class="theme-icon">🌙</span>
     </button>
 
-
-    
-    <header class="header">
-        <div class="container">
-            <h1>Ruby Pressure Calculator</h1>
-            <nav class="breadcrumb">
-                <a href="/ruby-app-docs/pt/">Início</a> > <span>Documentação</span>
-            </nav>
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Ruby Pressure Calculator</h1>
+                <p class="subtitle">Conversão precisa entre pressão e número de onda Raman</p>
+                
+                <div class="hero-buttons">
+                    <a href="pt/manual.html" class="btn primary">
+                        <span class="icon">📖</span> Manual do Usuário
+                    </a>
+                    <a href="pt/teoria.html" class="btn secondary">
+                        <span class="icon">🔬</span> Fundamentos Científicos
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="screenshot-container">
+                    <img src="assets/img/screenshots/main-activity/light/full.webp" 
+                         alt="Tela principal do aplicativo no modo claro"
+                         class="theme-sensitive-img"
+                         data-theme="light"
+                         loading="lazy">
+                    <img src="assets/img/screenshots/main-activity/dark/full.webp" 
+                         alt="Tela principal do aplicativo no modo escuro"
+                         class="theme-sensitive-img"
+                         data-theme="dark"
+                         loading="lazy"
+                         style="display: none;">
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <h2>Documentação Técnica</h2>
-            <p>Guia completo para utilização do aplicativo em pesquisas de alta pressão</p>
+    <main class="features">
+        <section class="feature-cards">
+            <div class="feature-card">
+                <div class="card-icon">📊</div>
+                <h3>Conversão Bidirecional</h3>
+                <p>Converta entre pressão (GPa) e número de onda Raman (cm⁻¹) com precisão</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="card-icon">⚙️</div>
+                <h3>Múltiplos Lasers</h3>
+                <p>Suporte para 488nm, 514.5nm, 532nm, 633nm e 785nm</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="card-icon">📁</div>
+                <h3>Gerenciamento de Dados</h3>
+                <p>Exporte seus resultados para análise posterior</p>
+            </div>
         </section>
 
-        <div class="grid">
-            <article class="card">
-                <h3><a href="manual.html">📱 Manual do Usuário</a></h3>
-                <ul>
-                    <li>Instruções passo a passo</li>
-                    <li>Configurações recomendadas</li>
-                    <li>Solução de problemas</li>
-                </ul>
-            </article>
-
-            <article class="card">
-                <h3><a href="teoria.html">🔬 Fundamentos Científicos</a></h3>
-                <ul>
-                    <li>Equações de calibração</li>
-                    <li>Limitações do método</li>
-                    <li>Referências bibliográficas</li>
-                </ul>
-            </article>
-        </div>
+        <section class="app-download">
+            <h2>Disponível para Android</h2>
+            <div class="download-buttons">
+                <a href="https://play.google.com/store/apps/details?id=com.cesarrfernandes.ruby07" class="btn download">
+                    <span class="icon">⬇️</span> Baixar na Play Store
+                </a>
+                <a href="https://github.com/cesarrf15/ruby-app/releases" class="btn secondary">
+                    <span class="icon">📦</span> APK Direto
+                </a>
+            </div>
+        </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>© 2023 Ruby Pressure Calculator - v1.2.0</p>
-            <p><a href="/privacy-policy">Política de Privacidade</a></p>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="pt/manual.html">Manual</a>
+                <a href="pt/teoria.html">Teoria</a>
+                <a href="privacy.html">Privacidade</a>
+                <a href="https://github.com/cesarrf15/ruby-app/issues">Suporte</a>
+            </div>
+            
+            <div class="footer-credits">
+                <p>&copy; 2023 Ruby Pressure Calculator</p>
+                <p>Desenvolvido por <a href="https://github.com/cesarrf15" target="_blank">César Fernandes</a></p>
+            </div>
         </div>
     </footer>
 
-    <script src="/ruby-app-docs/assets/js/app.js"></script>
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+    <script>
+    // Sistema de Gerenciamento de Temas
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Atualizar ícone do tema
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeToggle.setAttribute('aria-label', 
+                theme === 'dark' ? 'Alternar para tema claro' : 'Alternar para tema escuro');
+        }
+        
+        // Alternador de tema
+        themeToggle.addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            const newTheme = isDark ? 'dark' : 'light';
+            
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+            
+            // Atualizar imagens sensíveis ao tema
+            document.querySelectorAll('.theme-sensitive-img').forEach(img => {
+                img.style.display = img.dataset.theme === newTheme ? 'block' : 'none';
+            });
+        });
+        
+        // Inicialização
+        const currentTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        updateThemeIcon(currentTheme);
+        
+        // Garantir que as imagens corretas sejam mostradas no carregamento
+        if (currentTheme === 'dark') {
+            document.querySelectorAll('.theme-sensitive-img[data-theme="dark"]').forEach(img => {
+                img.style.display = 'block';
+            });
+            document.querySelectorAll('.theme-sensitive-img[data-theme="light"]').forEach(img => {
+                img.style.display = 'none';
+            });
+        }
+    });
+    </script>
 </body>
 </html>
