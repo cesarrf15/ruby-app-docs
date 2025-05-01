@@ -1,419 +1,102 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-
-
-    <!-- Controle de Tema Otimizado com Suporte a Screenshots -->
-    <script>
-        (function(){
-            const savedTheme = localStorage.getItem('theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
-            
-            // Aplica o tema instantaneamente
-            document.documentElement.classList.toggle('dark-mode', isDark);
-            
-            // Armazena o tema atual para uso nos scripts
-            window.currentTheme = isDark ? 'dark' : 'light';
-        })();
-    </script>
-
-
-
-
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual Avançado | Ruby Pressure Calculator</title>
-    
-    <!-- Otimização de carregamento -->
-    <link rel="preload" href="../assets/css/main.css" as="style">
-    <link rel="preload" href="../assets/js/app.js" as="script">
-    
-    <!-- Estilos -->
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/print.css" media="print">
-    
-    <!-- Favicon para múltiplas plataformas -->
-    <link rel="icon" href="../assets/img/favicon.ico" sizes="any">
-    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
-    
-    <!-- Metatags para SEO -->
-    <meta name="description" content="Manual completo do aplicativo Ruby Pressure Calculator para conversão entre pressão e número de onda Raman">
-    <meta name="keywords" content="ruby pressure, cálculo DAC, espectroscopia Raman, conversão pressão, número de onda">
-</head>
-
-<body class="manual-page">
-
-
-
-    <!-- Botão de Tema Aprimorado -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema" aria-live="polite">
+<!-- Botão de Tema Aprimorado -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
         <span id="theme-icon" class="theme-icon">🌙</span>
     </button>
 
-    <!-- ... (restante do conteúdo) ... -->
+    <!-- ... (conteúdo existente) ... -->
+
+    <!-- Exemplo de uso das imagens sensíveis ao tema -->
+    <div class="screenshot-container">
+        <img src="../assets/img/screenshots/main-activity/light/full.webp" 
+             alt="Tela principal no modo claro"
+             class="theme-sensitive-img"
+             data-theme="light"
+             loading="lazy">
+             
+        <img src="../assets/img/screenshots/main-activity/dark/full.webp" 
+             alt="Tela principal no modo escuro"
+             class="theme-sensitive-img"
+             data-theme="dark"
+             loading="lazy">
+    </div>
 
     <script>
-    // Controle Avançado do Tema com Screenshots
+    // Sistema Completo de Gerenciamento de Temas
     document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         
-        // Listener para alternância de tema
+        // 1. Configuração Inicial
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        // 2. Atualizar ícone conforme tema atual
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeToggle.setAttribute('aria-label', theme === 'dark' ? 
+                                  'Alternar para tema claro' : 'Alternar para tema escuro');
+        }
+        
+        // 3. Alternador de Tema
         themeToggle.addEventListener('click', function() {
             const isDark = document.documentElement.classList.toggle('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            window.currentTheme = isDark ? 'dark' : 'light';
+            const newTheme = isDark ? 'dark' : 'light';
             
-            // Atualiza ícone e ARIA
-            themeIcon.textContent = isDark ? '☀️' : '🌙';
-            this.setAttribute('aria-label', isDark ? 'Alternar para tema claro' : 'Alternar para tema escuro');
+            // Atualiza storage e variáveis
+            localStorage.setItem('theme', newTheme);
+            window.currentTheme = newTheme;
             
-            // Dispara evento para atualizar screenshots
-            const themeEvent = new CustomEvent('themeChanged', { detail: { theme: currentTheme } });
-            document.dispatchEvent(themeEvent);
+            // Atualiza interface
+            updateThemeIcon(newTheme);
             
-            // Força recarregamento das equações MathJax
+            // Dispara evento para componentes reativos
+            document.dispatchEvent(new CustomEvent('themeChanged', { 
+                detail: { theme: newTheme }
+            }));
+        });
+        
+        // 4. Sistema de Screenshots Dinâmicas
+        function updateThemeImages(theme) {
+            // Atualiza todas as imagens sensíveis ao tema
+            document.querySelectorAll('.theme-sensitive-img').forEach(img => {
+                if (img.dataset.theme === theme) {
+                    img.style.display = 'block';
+                    // Carrega a imagem se estiver em lazy loading
+                    if (img.loading === 'lazy' && !img.src) {
+                        img.src = img.dataset.src || img.src;
+                    }
+                } else {
+                    img.style.display = 'none';
+                }
+            });
+            
+            // Atualiza elementos CSS customizados
+            document.documentElement.style.setProperty('--light-display', theme === 'light' ? 'block' : 'none');
+            document.documentElement.style.setProperty('--dark-display', theme === 'dark' ? 'block' : 'none');
+        }
+        
+        // 5. Ouvinte para mudanças de tema (incluindo preferência do sistema)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) { // Só muda se não tiver preferência salva
+                const newTheme = e.matches ? 'dark' : 'light';
+                document.documentElement.classList.toggle('dark-mode', e.matches);
+                updateThemeIcon(newTheme);
+                updateThemeImages(newTheme);
+            }
+        });
+        
+        // 6. Inicialização
+        updateThemeIcon(currentTheme);
+        updateThemeImages(currentTheme);
+        
+        // 7. Ouvinte global para componentes reativos
+        document.addEventListener('themeChanged', (e) => {
+            updateThemeImages(e.detail.theme);
+            
+            // Atualiza MathJax se existir na página
             if (window.MathJax) {
                 MathJax.typesetPromise();
             }
         });
-
-        // Sistema de Screenshots Dinâmicas
-        function updateScreenshots(theme) {
-            document.querySelectorAll('.screenshot-container').forEach(container => {
-                const lightImg = container.querySelector('.screenshot[data-theme="light"]');
-                const darkImg = container.querySelector('.screenshot[data-theme="dark"]');
-                
-                if (theme === 'dark' && darkImg) {
-                    lightImg.style.display = 'none';
-                    darkImg.style.display = 'block';
-                } else {
-                    lightImg.style.display = 'block';
-                    darkImg.style.display = 'none';
-                }
-            });
-        }
-
-        // Listener para mudanças de tema
-        document.addEventListener('themeChanged', function(e) {
-            updateScreenshots(e.detail.theme);
-        });
-
-        // Inicialização
-        const currentTheme = localStorage.getItem('theme') || 
-                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        updateScreenshots(currentTheme);
-        themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
     });
-
-    // Exemplo de container de screenshot com suporte a temas
-    <div class="screenshot-container">
-        <img src="../assets/img/screenshots/main-activity/light/main.png" 
-             alt="Tela principal no modo claro"
-             class="screenshot"
-             data-theme="light">
-        <img src="../assets/img/screenshots/main-activity/dark/main.png" 
-             alt="Tela principal no modo escuro"
-             class="screenshot"
-             data-theme="dark"
-             style="display: none;">
-    </div>
     </script>
-
-
-
-
-
-    
-    <a class="skip-link" href="#main-content">Pular para conteúdo principal</a>
-    
-    <header class="manual-header" role="banner">
-        <div class="header-container">
-            <h1>Ruby Pressure Calculator</h1>
-            <p class="subtitle">Manual Completo v2.0</p>
-            
-            <nav class="breadcrumb" aria-label="Navegação estrutural">
-                <ol>
-                    <li><a href="../index.html">Início</a></li>
-                    <li><a href="manual.html">Manual</a></li>
-                    <li aria-current="page">Versão Avançada</li>
-                </ol>
-            </nav>
-            
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="theme-checkbox">
-                    <input type="checkbox" id="theme-checkbox">
-                    <span class="slider round"></span>
-                </label>
-                <span id="theme-label">Modo Escuro</span>
-            </div>
-        </div>
-        
-        <nav class="activity-nav" aria-label="Navegação principal">
-            <ul>
-                <li><a href="#main-activity" class="nav-btn active" data-section="main">Página Inicial</a></li>
-                <li><a href="#pressure-converter" class="nav-btn" data-section="pressure">Pressão→Número de Onda</a></li>
-                <li><a href="#wavenumber-converter" class="nav-btn" data-section="wavenumber">Número de Onda→Pressão</a></li>
-                <li><a href="#data-management" class="nav-btn" data-section="data">Gerenciamento de Dados</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main id="main-content" class="manual-container">
-        <!-- Seção MainActivity -->
-        <section id="main-activity" class="activity-section visible">
-            <h2>Página Principal</h2>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="screenshot-container">
-                        <img src="../assets/img/screenshots/main-activity/light/full.png" 
-                             alt="Tela principal do aplicativo mostrando ambos os modos de conversão"
-                             class="screenshot"
-                             data-theme="light">
-                        <img src="../assets/img/screenshots/main-activity/dark/full.png" 
-                             alt="Tela principal no modo escuro"
-                             class="screenshot dark"
-                             data-theme="dark">
-                    </div>
-                    
-                    <div class="feature-details">
-                        <h3>Navegação Básica</h3>
-                        <ul class="feature-list">
-                            <li>
-                                <span class="icon">🔄</span>
-                                <strong>Alternar entre modos:</strong> Toque nos botões principais para mudar entre as funções de conversão
-                            </li>
-                            <li>
-                                <span class="icon">🌓</span>
-                                <strong>Tema visual:</strong> O botão no canto superior direito alterna entre os modos claro e escuro
-                            </li>
-                            <li>
-                                <span class="icon">🌐</span>
-                                <strong>Idioma:</strong> O ícone de globo permite selecionar entre 5 idiomas disponíveis
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="feature-card reverse">
-                    <div class="feature-details">
-                        <h3>Controles Superiores</h3>
-                        <div class="controls-detail">
-                            <img src="../assets/img/screenshots/main-activity/light/controls.png" 
-                                 alt="Detalhe da barra de controles superiores"
-                                 class="controls-img">
-                                 
-                            <ol class="controls-list">
-                                <li><strong>Tema:</strong> Alterna entre cores claras e escuras</li>
-                                <li><strong>Idioma:</strong> Menu com seleção linguística</li>
-                                <li><strong>Ajuda:</strong> Acesso rápido a este manual</li>
-                                <li><strong>Trocar:</strong> Alterna entre as funções principais</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="quick-start">
-                <h3>Início Rápido</h3>
-                <div class="steps">
-                    <div class="step">
-                        <span class="step-number">1</span>
-                        <p>Selecione o tipo de conversão desejada</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span>
-                        <p>Toque no campo de entrada para inserir valores</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span>
-                        <p>O resultado será calculado automaticamente</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção PressureToWavenumber -->
-        <section id="pressure-converter" class="activity-section">
-            <h2>Conversão Pressão para Número de Onda</h2>
-            
-            <div class="converter-grid">
-                <div class="converter-details">
-                    <h3>Funcionamento Detalhado</h3>
-                    
-                    <div class="parameter-section">
-                        <h4>Configuração do Laser</h4>
-                        <div class="parameter-content">
-                            <img src="../assets/img/screenshots/pressure-converter/laser-selection.png" 
-                                 alt="Menu de seleção do laser de excitação"
-                                 class="parameter-img">
-                                 
-                            <div class="parameter-desc">
-                                <p>Selecione o comprimento de onda do laser utilizado em seu experimento:</p>
-                                <ul>
-                                    <li><strong>488nm:</strong> Laser de argônio-ion</li>
-                                    <li><strong>514.5nm:</strong> Padrão ouro para ruby</li>
-                                    <li><strong>532nm:</strong> Laser de estado sólido</li>
-                                    <li><strong>633nm:</span> Laser HeNe</li>
-                                    <li><strong>785nm:</strong> Para medidas especiais</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="parameter-section">
-                        <h4>Entrada de Pressão</h4>
-                        <div class="parameter-content reverse">
-                            <div class="parameter-desc">
-                                <p>Insira o valor da pressão em <strong>Gigapascals (GPa)</strong>:</p>
-                                <ul>
-                                    <li>Faixa válida: 0 a 500 GPa</li>
-                                    <li>Use ponto ou vírgula como separador decimal</li>
-                                    <li>O cálculo é realizado automaticamente</li>
-                                </ul>
-                            </div>
-                            <img src="../assets/img/screenshots/pressure-converter/input-field.png" 
-                                 alt="Campo para inserção da pressão"
-                                 class="parameter-img">
-                        </div>
-                    </div>
-                    
-                    <div class="equation-section">
-                        <h4>Equações Utilizadas</h4>
-                        <div class="equation-container" id="pressure-equation">
-                            <!-- Renderizado via JavaScript -->
-                        </div>
-                        <div class="equation-params">
-                            <table>
-                                <caption>Parâmetros da Equação</caption>
-                                <tr>
-                                    <th>Símbolo</th>
-                                    <th>Descrição</th>
-                                    <th>Valor</th>
-                                </tr>
-                                <tr>
-                                    <td>λ₀</td>
-                                    <td>Comprimento de onda do Ruby em condições ambientes</td>
-                                    <td>694.22 nm</td>
-                                </tr>
-                                <tr>
-                                    <td>λ<sub>exc</sub></td>
-                                    <td>Comprimento de onda do laser de excitação</td>
-                                    <td>Variável</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="converter-features">
-                    <h3>Recursos Avançados</h3>
-                    
-                    <div class="feature-box">
-                        <h4>Ajuste de Calibração</h4>
-                        <div class="feature-content">
-                            <img src="../assets/img/screenshots/pressure-converter/offset-adjust.png" 
-                                 alt="Controles de ajuste fino do número de onda"
-                                 class="feature-img">
-                                 
-                            <div class="feature-desc">
-                                <p>Compense variações instrumentais com o ajuste fino:</p>
-                                <ol>
-                                    <li>Selecione o laser desejado</li>
-                                    <li>Use os botões <strong>+</strong> e <strong>-</strong> para ajustar</li>
-                                    <li>O valor é salvo automaticamente por laser</li>
-                                </ol>
-                                <p class="note">Nota: O ajuste padrão é 0.0 cm⁻¹</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="feature-box">
-                        <h4>Gerenciamento de Resultados</h4>
-                        <div class="feature-content reverse">
-                            <div class="feature-desc">
-                                <p>Opções para armazenar seus cálculos:</p>
-                                <ul>
-                                    <li><strong>Salvar no Histórico:</strong> Armazena até 50 conversões</li>
-                                    <li><strong>Exportar para Arquivo:</strong> Gera arquivo .txt nos Downloads</li>
-                                    <li><strong>Importar Dados:</strong> Carrega cálculos anteriores</li>
-                                </ul>
-                            </div>
-                            <img src="../assets/img/screenshots/pressure-converter/save-options.png" 
-                                 alt="Menu de opções para salvar resultados"
-                                 class="feature-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção WavenumberToPressure -->
-        <section id="wavenumber-converter" class="activity-section">
-            <h2>Conversão Número de Onda para Pressão</h2>
-            <!-- Conteúdo similar ao anterior, adaptado para esta funcionalidade -->
-            <!-- ... -->
-        </section>
-
-        <!-- Seção Gerenciamento de Dados -->
-        <section id="data-management" class="activity-section">
-            <h2>Gerenciamento de Dados</h2>
-            <!-- Detalhes sobre importação/exportação, histórico, etc. -->
-            <!-- ... -->
-        </section>
-    </main>
-
-    <footer class="manual-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Recursos Adicionais</h3>
-                <ul>
-                    <li><a href="teoria.html">Fundamentos Teóricos</a></li>
-                    <li><a href="../api.html">Documentação da API</a></li>
-                    <li><a href="../privacy.html">Política de Privacidade</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Suporte</h3>
-                <address>
-                    <p>Dúvidas técnicas: <a href="mailto:support@rubypressure.app">support@rubypressure.app</a></p>
-                    <p>Relatar bugs: <a href="https://github.com/cesarrf15/ruby-app/issues" target="_blank">GitHub Issues</a></p>
-                </address>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Versão</h3>
-                <p>Aplicativo: v2.1.0</p>
-                <p>Manual: v2.0</p>
-                <p>Última atualização: <time datetime="2023-11-15">15/11/2023</time></p>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2023 Ruby Pressure Calculator. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="../assets/js/app.js"></script>
-    <script src="../assets/js/equations.js"></script>
-    <script>
-        // Inicialização específica da página
-        document.addEventListener('DOMContentLoaded', function() {
-            // Carrega a equação apropriada
-            renderPressureEquation();
-            
-            // Configura navegação por seções
-            setupSectionNavigation();
-            
-            // Configura alternador de tema
-            setupThemeToggle();
-        });
-    </script>
-</body>
-</html>
