@@ -59,6 +59,12 @@ class ThemeManager {
         
         // Salva preferência
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+        // Notifica a galeria para atualizar
+        document.dispatchEvent(new CustomEvent('themeChanged', {
+        detail: { isDark }
+        }));
+        
     }
 
     static setupThemeButton() {
