@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
+
+    <!-- Controle de Tema Otimizado com Suporte a Screenshots -->
+    <script>
+        (function(){
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+            
+            // Aplica o tema instantaneamente
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            
+            // Armazena o tema atual para uso nos scripts
+            window.currentTheme = isDark ? 'dark' : 'light';
+        })();
+    </script>
+
+
+
+
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual Avançado | Ruby Pressure Calculator</title>
@@ -24,6 +45,89 @@
 </head>
 
 <body class="manual-page">
+
+
+
+    <!-- Botão de Tema Aprimorado -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema" aria-live="polite">
+        <span id="theme-icon" class="theme-icon">🌙</span>
+    </button>
+
+    <!-- ... (restante do conteúdo) ... -->
+
+    <script>
+    // Controle Avançado do Tema com Screenshots
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Listener para alternância de tema
+        themeToggle.addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            window.currentTheme = isDark ? 'dark' : 'light';
+            
+            // Atualiza ícone e ARIA
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+            this.setAttribute('aria-label', isDark ? 'Alternar para tema claro' : 'Alternar para tema escuro');
+            
+            // Dispara evento para atualizar screenshots
+            const themeEvent = new CustomEvent('themeChanged', { detail: { theme: currentTheme } });
+            document.dispatchEvent(themeEvent);
+            
+            // Força recarregamento das equações MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+
+        // Sistema de Screenshots Dinâmicas
+        function updateScreenshots(theme) {
+            document.querySelectorAll('.screenshot-container').forEach(container => {
+                const lightImg = container.querySelector('.screenshot[data-theme="light"]');
+                const darkImg = container.querySelector('.screenshot[data-theme="dark"]');
+                
+                if (theme === 'dark' && darkImg) {
+                    lightImg.style.display = 'none';
+                    darkImg.style.display = 'block';
+                } else {
+                    lightImg.style.display = 'block';
+                    darkImg.style.display = 'none';
+                }
+            });
+        }
+
+        // Listener para mudanças de tema
+        document.addEventListener('themeChanged', function(e) {
+            updateScreenshots(e.detail.theme);
+        });
+
+        // Inicialização
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        updateScreenshots(currentTheme);
+        themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Exemplo de container de screenshot com suporte a temas
+    <div class="screenshot-container">
+        <img src="../assets/img/screenshots/main-activity/light/main.png" 
+             alt="Tela principal no modo claro"
+             class="screenshot"
+             data-theme="light">
+        <img src="../assets/img/screenshots/main-activity/dark/main.png" 
+             alt="Tela principal no modo escuro"
+             class="screenshot"
+             data-theme="dark"
+             style="display: none;">
+    </div>
+    </script>
+
+
+
+
+
+    
     <a class="skip-link" href="#main-content">Pular para conteúdo principal</a>
     
     <header class="manual-header" role="banner">
