@@ -26,6 +26,15 @@ class ThemeManager {
         this.setupThemeButton();
         this.setupThemeSync();
         this.preventFlash();
+
+        // Verifica o tema SALVO primeiro
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+        
+        // Aplica o tema inicial
+        this.applyTheme(initialTheme === 'dark');
+        
     }
 
     static setupInitialTheme() {
