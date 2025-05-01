@@ -2,17 +2,7 @@
 <html lang="pt-BR">
 <head>
     <!-- Controle de Tema Avançado -->
-    <script>
-        (function(){
-            const savedTheme = localStorage.getItem('theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
-            
-            document.documentElement.classList.toggle('dark-mode', isDark);
-            window.currentTheme = isDark ? 'dark' : 'light';
-        })();
-    </script>
-
+    
     <link rel="stylesheet" href="assets/css/main.css">
     <script src="assets/js/app.js" defer></script>
     
@@ -24,85 +14,7 @@
     <!-- SEO e Metadados -->
     <meta name="description" content="Aplicativo para conversão precisa entre pressão hidrostática e número de onda Raman usando calibração por rubi">
     <meta name="keywords" content="ruby pressure, cálculo DAC, espectroscopia Raman, alta pressão">
-    
-    <!-- Fontes Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Pré-carregamentos -->
-    <link rel="preload" href="assets/css/main.css" as="style">
-    <link rel="preload" href="assets/js/app.js" as="script">
-    
-    <!-- Estilos -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/index.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="assets/img/favicon.ico" sizes="any">
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-    
-    <style>
-        :root {
-            --font-primary: 'Source Sans 3', sans-serif;
-            --font-secondary: 'Roboto', sans-serif;
-        }
-        
-        body {
-            font-family: var(--font-primary);
-            line-height: 1.6;
-        }
-        
-        h1, h2, h3 {
-            font-family: var(--font-secondary);
-            font-weight: 600;
-        }
-    </style>
-
-    <!-- Adicione este estilo -->
-    <style>
-        :root {
-            --light-display: block;
-            --dark-display: none;
-        }
-        .dark-mode {
-            --light-display: none;
-            --dark-display: block;
-        }
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        .dark-mode .theme-toggle {
-            background: rgba(255, 255, 255, 0.7);
-        }
-        .theme-icon {
-            font-size: 1.2rem;
-        }
-        .theme-sensitive-img {
-            transition: opacity 0.4s ease;
-        }
-        .theme-sensitive-img[data-theme="light"] {
-            display: var(--light-display);
-        }
-        .theme-sensitive-img[data-theme="dark"] {
-            display: var(--dark-display);
-        }
-    </style>
-    
+       
 </head>
 
 <body class="index-page">
