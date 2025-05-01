@@ -92,3 +92,17 @@ class ThemeManager {
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => ThemeManager.init());
+
+// DEBUG: Controle manual
+let debugCount = 0;
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    debugCount++;
+    const isDark = debugCount % 2 === 0;
+    document.documentElement.classList.toggle('dark-mode', isDark);
+    
+    const img = document.querySelector('.screenshot-gallery img');
+    if (img) {
+        img.src = `/ruby-app-docs/assets/img/screenshots/main-activity/${
+            isDark ? 'dark' : 'light'}/full.webp?debug=${Date.now()}`;
+    }
+});
