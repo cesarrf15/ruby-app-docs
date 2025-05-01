@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
+    <!-- ADICIONE ESTE SCRIPT COMO PRIMEIRO ELEMENTO DENTRO DO <head> -->
+    <script>
+        // Aplicação ULTRA-RÁPIDA do tema antes de qualquer renderização
+        (function(){
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+            
+            // Aplica as variáveis CSS instantaneamente
+            const root = document.documentElement;
+            root.style.setProperty('--bg-color', isDark ? '#121212' : '#ffffff');
+            root.style.setProperty('--text-color', isDark ? '#f0f0f0' : '#333333');
+            
+            // Marca o tema no HTML antes da renderização
+            if (isDark) root.classList.add('dark-mode');
+            
+            // Esconde temporariamente para evitar flash
+            root.style.visibility = 'hidden';
+            setTimeout(() => root.style.visibility = '', 50);
+        })();
+    </script>
+
     
     <meta charset="UTF-8">
     <title>Manual do Usuário | Ruby Pressure Calculator</title>
