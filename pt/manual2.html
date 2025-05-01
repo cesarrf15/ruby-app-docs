@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual | Ruby Pressure Calculator</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <!-- Script da galeria (ver parte 2) -->
+    <script src="../assets/js/screenshot-gallery.js" defer></script>
+</head>
+<body>
+    <header class="manual-header">
+        <h1>Manual Completo</h1>
+        <nav class="activity-nav">
+            <a href="#main-activity" class="nav-btn">Página Inicial</a>
+            <a href="#pressure-converter" class="nav-btn">Pressão→Número de Onda</a>
+            <a href="#wavenumber-converter" class="nav-btn">Número de Onda→Pressão</a>
+        </nav>
+    </header>
 
+    <main class="manual-container">
+        <!-- Seção MainActivity -->
+        <section id="main-activity" class="activity-section">
+            <h2>Página Principal</h2>
+            <div class="screenshot-gallery" data-folder="main-activity"></div>
+            
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3><span class="icon">🌐</span> Controles Superiores</h3>
+                    <ul>
+                        <li><strong>Tema:</strong> Alterna entre claro/escuro</li>
+                        <li><strong>Idioma:</strong> Suporte a 5 línguas</li>
+                        <li><strong>Ajuda:</strong> Acesso rápido a este manual</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><span class="icon">↔</span> Modos de Cálculo</h3>
+                    <p>Dois caminhos de conversão:</p>
+                    <ol>
+                        <li><code>Pressão → Número de Onda</code></li>
+                        <li><code>Número de Onda → Pressão</code></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção PressureToWavenumber -->
+        <section id="pressure-converter" class="activity-section">
+            <h2>Conversão Pressão para Número de Onda</h2>
+            <div class="screenshot-gallery" data-folder="pressure-to-wavenumber"></div>
+            
+            <h3>Passo a Passo</h3>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <p>Selecione o laser utilizado (ex: 514.5nm)</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <p>Insira a pressão em GPa (0-500)</p>
+                </div>
+                <!-- ... -->
+            </div>
+        </section>
+
+        <!-- Seção WavenumberToPressure -->
+        <section id="wavenumber-converter" class="activity-section">
+            <h2>Conversão Número de Onda para Pressão</h2>
+            <div class="screenshot-gallery" data-folder="wavenumber-to-pressure"></div>
+            
+            <div class="notice-box">
+                <p>⚠️ <strong>Dica:</strong> Para lasers 785nm, valores negativos são aceitos</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="manual-footer">
+        <a href="teoria.html" class="theory-link">Fundamentos Teóricos →</a>
+    </footer>
+</body>
+</html>
