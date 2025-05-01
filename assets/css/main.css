@@ -155,15 +155,6 @@ body {
     }
 }
 
-.screenshot {
-    max-width: min(100%, 400px); /* Máximo de 400px */
-    height: auto;
-    display: block;
-    margin: 1rem auto;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-}
-
 @media (min-width: 768px) {
     .screenshot {
         max-width: min(100%, 500px); /* Um pouco maior em telas médias */
@@ -188,19 +179,23 @@ body {
     opacity: 0.9; /* Aumenta contraste no dark mode */
 }
 
+/* Garanta que o container não está escondendo a imagem */
 .image-container {
     position: relative;
-    min-height: 300px; /* Altura aproximada da imagem */
-    background: var(--card-bg);
+    min-height: auto; /* Remova altura fixa */
+    background: transparent; /* Remove fundo do container */
+    text-align: center; /* Centraliza a imagem */
 }
+
 
 .screenshot {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.screenshot.loaded {
-    opacity: 1;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /* Remova qualquer opacity/transition aqui */
 }
 
 /* Garante contraste em ambos os temas */
