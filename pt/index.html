@@ -59,9 +59,12 @@
 
 <body class="index-page">
     <!-- Botão de Tema Acessível -->
+<body class="index-page">
+    <!-- Botão de Tema (coloque esta linha no início do body) -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
         <span id="theme-icon" class="theme-icon">🌙</span>
     </button>
+
 
     <header class="hero">
         <div class="hero-container">
@@ -294,5 +297,42 @@
         });
     });
     </script>
+
+
+    <script>
+    // Sistema de Tema (cole este código antes do </body>)
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Atualiza ícone
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeToggle.setAttribute('aria-label', 
+                theme === 'dark' ? 'Alternar para tema claro' : 'Alternar para tema escuro');
+        }
+        
+        // Alternador de tema
+        themeToggle.addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            const newTheme = isDark ? 'dark' : 'light';
+            
+            localStorage.setItem('theme', newTheme);
+            document.documentElement.style.setProperty('--light-display', isDark ? 'none' : 'block');
+            document.documentElement.style.setProperty('--dark-display', isDark ? 'block' : 'none');
+            updateThemeIcon(newTheme);
+        });
+        
+        // Inicialização
+        updateThemeIcon(window.currentTheme);
+    });
+</script>
+
+
+
+
+
+
+    
 </body>
 </html>
