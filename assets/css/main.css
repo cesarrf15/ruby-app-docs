@@ -240,4 +240,48 @@ body {
     font-size: 1.2rem;
 }
 
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.gallery-grid figure {
+    margin: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid figure:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9/16;
+    object-fit: contain;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.gallery-grid figcaption {
+    padding: 0.8rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    background: var(--card-bg);
+}
+
+.error {
+    color: var(--ruby-red);
+    padding: 1rem;
+    border: 1px dashed var(--ruby-red);
+}
+
+
 
