@@ -332,5 +332,42 @@ body {
     border: 1px dashed var(--ruby-red);
 }
 
+/* Garantia de que o tema será aplicado corretamente */
+html {
+    scroll-behavior: smooth;
+}
 
+/* Transições suaves para o tema */
+body, body * {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease;
+}
+
+/* Imagens sensíveis ao tema */
+.theme-sensitive-img {
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+.theme-sensitive-img[data-theme="light"] {
+    display: var(--light-display, block);
+}
+
+.theme-sensitive-img[data-theme="dark"] {
+    display: var(--dark-display, none);
+}
+
+.dark-mode .theme-sensitive-img[data-theme="light"] {
+    display: none;
+}
+
+.dark-mode .theme-sensitive-img[data-theme="dark"] {
+    display: block;
+}
+
+/* Garante que o botão de tema seja visível */
+#theme-toggle {
+    display: flex !important;
+}
 
