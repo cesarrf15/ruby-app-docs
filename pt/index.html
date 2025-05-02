@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Controle de Tema Avançado -->
-    
-    <link rel="stylesheet" href="assets/css/main.css">
-    <script src="assets/js/app.js" defer></script>
-    
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruby Pressure Calculator</title>
@@ -14,32 +8,12 @@
     <!-- SEO e Metadados -->
     <meta name="description" content="Aplicativo para conversão precisa entre pressão hidrostática e número de onda Raman usando calibração por rubi">
     <meta name="keywords" content="ruby pressure, cálculo DAC, espectroscopia Raman, alta pressão">
-
-
-
-    <!-- Estilos -->
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/main.css">
     
-    <!-- Controle de Tema Inline (simplificado) -->
-    <style>
-        :root {
-            --light-display: block;
-            --dark-display: none;
-        }
-        .dark-mode {
-            --light-display: none;
-            --dark-display: block;
-        }
-        .theme-sensitive-img {
-            display: var(--light-display);
-        }
-        .dark-mode .theme-sensitive-img[data-theme="dark"] {
-            display: var(--dark-display);
-        }
-    </style>
-
-    
-       
+    <!-- Pré-carregamento para melhor performance -->
+    <link rel="preload" href="assets/js/app.js" as="script">
 </head>
 
 <body class="index-page">
