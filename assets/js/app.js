@@ -1,10 +1,9 @@
-// Sistema Único de Gerenciamento de Tema
+// Sistema de Tema Aprimorado
 class ThemeManager {
     static init() {
         this.setupInitialTheme();
         this.setupThemeButton();
-        this.setupThemeSensitiveImages();
-        console.log("Tema inicializado");
+        this.setupThemeListeners();
     }
 
     static setupInitialTheme() {
@@ -19,15 +18,28 @@ class ThemeManager {
         document.documentElement.classList.toggle('dark-mode', isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         
-        const icon = document.getElementById('theme-icon');
-        if (icon) icon.textContent = isDark ? '☀️' : '🌙';
-        
+        this.updateThemeIcon(isDark);
         this.updateThemeImages(isDark);
+    }
+
+    static updateThemeIcon(isDark) {
+        const icon = document.getElementById('theme-icon');
+        if (icon) {
+            icon.textContent = isDark ? '☀️' : '🌙';
+            icon.setAttribute('aria-label', isDark ? 'Alternar para tema claro' : 'Alternar para tema escuro');
+        }
+    }
+
+    static updateThemeImages(isDark) {
+        document.querySelectorAll('.theme-sensitive-img').forEach(img => {
+            img.style.display = img.dataset.theme === (isDark ? 'dark' : 'light') ? 'block' : 'none';
+        });
     }
 
     static setupThemeButton() {
         const button = document.getElementById('theme-toggle');
         if (button) {
+            button.style.display = 'flex'; // Garante que o botão é visível
             button.addEventListener('click', () => {
                 const isDark = !document.documentElement.classList.contains('dark-mode');
                 this.applyTheme(isDark);
@@ -35,20 +47,17 @@ class ThemeManager {
         }
     }
 
-    static setupThemeSensitiveImages() {
-        // Mostra apenas as imagens do tema atual
-        this.updateThemeImages(document.documentElement.classList.contains('dark-mode'));
-    }
-
-    static updateThemeImages(isDark) {
-        document.querySelectorAll('.theme-sensitive-img').forEach(img => {
-            const imgTheme = img.dataset.theme;
-            img.style.display = (imgTheme === (isDark ? 'dark' : 'light')) ? 'block' : 'none';
+    static setupThemeListeners() {
+        // Responde a mudanças no tema do sistema
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                this.applyTheme(e.matches);
+            }
         });
     }
 }
 
-// Inicialização segura para todas as páginas
+// Inicialização segura
 document.addEventListener('DOMContentLoaded', () => {
     ThemeManager.init();
     
