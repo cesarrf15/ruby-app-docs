@@ -261,15 +261,22 @@
 
     <script>
     // Sistema de Tema (cole este código antes do </body>)
+    <!-- Script unificado inline -->
+    <script>
+    // Sistema de Tema Simplificado
     document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         
-        // Atualiza ícone
-        function updateThemeIcon(theme) {
-            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-            themeToggle.setAttribute('aria-label', 
-                theme === 'dark' ? 'Alternar para tema claro' : 'Alternar para tema escuro');
+        // Verificar tema salvo ou preferência do sistema
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (systemDark ? 'dark' : 'light');
+        
+        // Aplicar tema inicial
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+            themeIcon.textContent = '☀️';
         }
         
         // Alternador de tema
@@ -278,14 +285,28 @@
             const newTheme = isDark ? 'dark' : 'light';
             
             localStorage.setItem('theme', newTheme);
-            document.documentElement.style.setProperty('--light-display', isDark ? 'none' : 'block');
-            document.documentElement.style.setProperty('--dark-display', isDark ? 'block' : 'none');
-            updateThemeIcon(newTheme);
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+            
+            // Atualizar imagens sensíveis ao tema
+            document.querySelectorAll('.theme-sensitive-img').forEach(img => {
+                if (img.dataset.theme === newTheme) {
+                    img.style.display = 'block';
+                } else {
+                    img.style.display = 'none';
+                }
+            });
         });
         
-        // Inicialização
-        updateThemeIcon(window.currentTheme);
+        // Ouvinte para mudanças de tema do sistema
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                document.documentElement.classList.toggle('dark-mode', e.matches);
+                themeIcon.textContent = e.matches ? '☀️' : '🌙';
+            }
+        });
     });
+    </script>
 </script>
 
 
