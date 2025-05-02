@@ -1,1 +1,243 @@
-fafdfasaf
+:root {
+    /* Cores modo claro */
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --primary-color: #4a6da7;
+    --card-bg: #f8f9fa;
+}
+
+.dark-mode {
+    /* Cores modo escuro */
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+    --primary-color: #6c8fc7;
+    --card-bg: #1e1e1e;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-sensitive-img {
+    transition: opacity 0.4s ease;
+}
+
+@media (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    header.hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  /* outros estilos... */
+}
+
+/* ===== TIPOGRAFIA ===== */
+:root {
+  --font-base: 'Segoe UI', Roboto, sans-serif; /* Adapte para suas fontes */
+  --font-mono: 'Courier New', monospace;
+  --line-height: 1.6;
+}
+
+body {
+  font-family: var(--font-base);
+  line-height: var(--line-height);
+  color: var(--text-color);
+}
+
+/* Títulos */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 2rem 0 1rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+/* Texto base */
+p {
+  margin-bottom: 1rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Listas */
+ul, ol {
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Códigos/equações */
+code, .equation {
+  font-family: var(--font-mono);
+  background-color: var(--card-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+
+/* ===== ESPAÇAMENTO ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+/* Margens responsivas */
+@media (max-width: 768px) {
+  .screenshot-container {
+     max-width: 100%;
+     padding: 0 15px;
+   }
+  .container {
+    padding: 0 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+
+@media (min-width: 1200px) {
+    .screenshot-container {
+        max-width: 50%;
+    }
+}
+
+
+
+/* Teoria - Equações */
+.equation-container {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+/* Teoria - Tabelas */
+.parameters-table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+}
+
+.parameters-table th, 
+.parameters-table td {
+  padding: 0.75rem;
+  border: 1px solid var(--primary-color);
+  text-align: left;
+}
+
+.parameters-table th {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Teoria - Notas */
+.note {
+  background-color: rgba(74, 109, 167, 0.1);
+  border-left: 4px solid var(--primary-color);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+
+/* Links */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #3a5a8a;
+}
+
+/* Destaque em texto */
+strong, b {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Blocos de código/destaque */
+pre {
+  background-color: var(--card-bg);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+
+.theme-sensitive-img {
+    width: 100%;
+    height: auto;
+    display: none;
+    object-fit: contain;
+    transition: opacity 0.4s ease;
+}
+
+/* Mostra apenas a imagem do tema ativo */
+.theme-sensitive-img[data-theme="light"] {
+  display: var(--light-display, var(--initial-display, block));
+}
+
+.theme-sensitive-img[data-theme="dark"] {
+  display: var(--dark-display, var(--initial-display, none));
+}
+
+.dark-mode .theme-sensitive-img[data-theme="light"] {
+  display: none;
+}
+
+.dark-mode .theme-sensitive-img[data-theme="dark"] {
+  display: block;
+}
+
+
+/* Container das imagens */
+.screenshot-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Largura máxima para desktop */
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
