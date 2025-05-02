@@ -3,7 +3,8 @@ class ThemeManager {
     static init() {
         this.setupInitialTheme();
         this.setupThemeButton();
-        console.log("Tema inicializado"); // Debug
+        this.setupThemeSensitiveImages();
+        console.log("Tema inicializado");
     }
 
     static setupInitialTheme() {
@@ -21,7 +22,7 @@ class ThemeManager {
         const icon = document.getElementById('theme-icon');
         if (icon) icon.textContent = isDark ? '☀️' : '🌙';
         
-        console.log(`Tema aplicado: ${isDark ? 'dark' : 'light'}`); // Debug
+        this.updateThemeImages(isDark);
     }
 
     static setupThemeButton() {
@@ -33,9 +34,26 @@ class ThemeManager {
             });
         }
     }
+
+    static setupThemeSensitiveImages() {
+        // Mostra apenas as imagens do tema atual
+        this.updateThemeImages(document.documentElement.classList.contains('dark-mode'));
+    }
+
+    static updateThemeImages(isDark) {
+        document.querySelectorAll('.theme-sensitive-img').forEach(img => {
+            const imgTheme = img.dataset.theme;
+            img.style.display = (imgTheme === (isDark ? 'dark' : 'light')) ? 'block' : 'none';
+        });
+    }
 }
 
-// Inicialização segura
+// Inicialização segura para todas as páginas
 document.addEventListener('DOMContentLoaded', () => {
     ThemeManager.init();
+    
+    // Inicializa MathJax se existir na página
+    if (typeof MathJax !== 'undefined') {
+        MathJax.typesetPromise();
+    }
 });
