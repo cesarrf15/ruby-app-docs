@@ -20,6 +20,7 @@
     <!-- Botão de Tema Acessível -->
 <body class="index-page">
     <!-- Botão de Tema (coloque esta linha no início do body) -->
+<!-- Botão de Tema -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
         <span id="theme-icon" class="theme-icon">🌙</span>
     </button>
@@ -205,114 +206,6 @@
 
     <!-- Scripts -->
     <script src="assets/js/app.js"></script>
-    <script>
-    // Sistema de Gerenciamento de Temas
-    document.addEventListener('DOMContentLoaded', function() {
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
         
-        // Atualizar ícone do tema
-        function updateThemeIcon(theme) {
-            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-            themeToggle.setAttribute('aria-label', 
-                theme === 'dark' ? 'Alternar para tema claro' : 'Alternar para tema escuro');
-        }
-        
-        // Alternador de tema
-        themeToggle.addEventListener('click', function() {
-            const isDark = document.documentElement.classList.toggle('dark-mode');
-            const newTheme = isDark ? 'dark' : 'light';
-            
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-            
-            // Atualizar imagens sensíveis ao tema
-            document.querySelectorAll('.theme-sensitive-img').forEach(img => {
-                img.style.display = img.dataset.theme === newTheme ? 'block' : 'none';
-            });
-        });
-        
-        // Inicialização
-        const currentTheme = localStorage.getItem('theme') || 
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        
-        updateThemeIcon(currentTheme);
-        
-        // Garantir que as imagens corretas sejam mostradas no carregamento
-        if (currentTheme === 'dark') {
-            document.querySelectorAll('.theme-sensitive-img[data-theme="dark"]').forEach(img => {
-                img.style.display = 'block';
-            });
-            document.querySelectorAll('.theme-sensitive-img[data-theme="light"]').forEach(img => {
-                img.style.display = 'none';
-            });
-        }
-
-        // Simulador de seletor de idioma (funcionalidade real deve ser implementada no app)
-        document.querySelector('.language-selector select').addEventListener('change', function() {
-            const lang = this.value;
-            // Aqui você pode adicionar a lógica de redirecionamento ou mudança de idioma
-            console.log('Idioma selecionado:', lang);
-        });
-    });
-    </script>
-
-
-    <script>
-    // Sistema de Tema (cole este código antes do </body>)
-    <!-- Script unificado inline -->
-    <script>
-    // Sistema de Tema Simplificado
-    document.addEventListener('DOMContentLoaded', function() {
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        
-        // Verificar tema salvo ou preferência do sistema
-        const savedTheme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const currentTheme = savedTheme || (systemDark ? 'dark' : 'light');
-        
-        // Aplicar tema inicial
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            themeIcon.textContent = '☀️';
-        }
-        
-        // Alternador de tema
-        themeToggle.addEventListener('click', function() {
-            const isDark = document.documentElement.classList.toggle('dark-mode');
-            const newTheme = isDark ? 'dark' : 'light';
-            
-            localStorage.setItem('theme', newTheme);
-            themeIcon.textContent = isDark ? '☀️' : '🌙';
-            
-            // Atualizar imagens sensíveis ao tema
-            document.querySelectorAll('.theme-sensitive-img').forEach(img => {
-                if (img.dataset.theme === newTheme) {
-                    img.style.display = 'block';
-                } else {
-                    img.style.display = 'none';
-                }
-            });
-        });
-        
-        // Ouvinte para mudanças de tema do sistema
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                document.documentElement.classList.toggle('dark-mode', e.matches);
-                themeIcon.textContent = e.matches ? '☀️' : '🌙';
-            }
-        });
-    });
-    </script>
-</script>
-
-
-
-
-
-
-    
 </body>
 </html>
