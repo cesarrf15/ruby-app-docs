@@ -1,26 +1,40 @@
-/* ===== RESET E VARIÁVEIS ===== */
+/* ===== VARIÁVEIS GLOBAIS ===== */
 :root {
-  /* Light Theme Defaults */
+  /* Light Mode Defaults */
   --bg-color: #ffffff;
   --text-color: #333333;
   --card-bg: #f8f9fa;
   --border-color: #dee2e6;
   --ruby-red: #9b111e;
-  --transition-time: 0.3s;
-
-  /* Dark Theme - serão aplicadas via classe */
+  --math-color: #2f2f2f;
+  
+  /* Dark Mode */
   --dark-bg: #121212;
   --dark-text: #f8f9fa;
   --dark-card: #1e1e1e;
   --dark-border: #495057;
+  --dark-math: #f8f9fa;
+  
+  /* Transições */
+  --transition-time: 0.3s;
 }
 
-/* ===== BASE ===== */
+/* ===== SISTEMA DE TEMA ===== */
+.dark-mode {
+  --bg-color: var(--dark-bg);
+  --text-color: var(--dark-text);
+  --card-bg: var(--dark-card);
+  --border-color: var(--dark-border);
+  --math-color: var(--dark-math);
+}
+
+/* ===== ELEMENTOS BASE ===== */
 * {
   box-sizing: border-box;
-  transition: background-color var(--transition-time) ease, 
-              color var(--transition-time) ease,
-              border-color var(--transition-time) ease;
+  transition: 
+    background-color var(--transition-time) ease,
+    color var(--transition-time) ease,
+    border-color var(--transition-time) ease;
 }
 
 html {
@@ -35,19 +49,13 @@ body {
   color: var(--text-color);
   margin: 0;
   padding: 0;
-  transition: background-color var(--transition-time) ease, 
-              color var(--transition-time) ease;
+  transition: 
+    background-color var(--transition-time) ease,
+    color var(--transition-time) ease;
 }
 
-/* ===== SISTEMA DE TEMA ===== */
-.dark-mode {
-  --bg-color: var(--dark-bg);
-  --text-color: var(--dark-text);
-  --card-bg: var(--dark-card);
-  --border-color: var(--dark-border);
-}
-
-/* Botão de Tema - IDÊNTICO EM TODAS AS PÁGINAS */
+/* ===== COMPONENTES COMUNS ===== */
+/* Botão de Tema (Consistente em todas páginas) */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -63,6 +71,7 @@ body {
   cursor: pointer;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-time) ease;
 }
 
 .theme-toggle:hover {
@@ -71,7 +80,6 @@ body {
 
 .theme-icon {
   font-size: 1.2rem;
-  display: block;
 }
 
 /* Imagens Sensíveis ao Tema */
@@ -95,8 +103,53 @@ body {
   display: block;
 }
 
-/* ===== COMPONENTES COMUNS ===== */
-/* Containers de Equações (teoria.html) */
+/* ===== MATHJAX (Fórmulas Matemáticas) ===== */
+.mjx-chtml {
+  color: var(--math-color) !important;
+  fill: var(--math-color) !important;
+}
+
+.mjx-math {
+  color: var(--math-color) !important;
+}
+
+.dark-mode .mjx-chtml,
+.dark-mode .mjx-math {
+  color: var(--dark-math) !important;
+  fill: var(--dark-math) !important;
+  filter: brightness(1.1);
+}
+
+/* ===== ESTILOS ESPECÍFICOS POR PÁGINA ===== */
+/* Página Index (index.html) */
+.index-page .hero {
+  background-color: var(--card-bg);
+  padding: 3rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Página Manual (manual3.html) */
+.manual-page .feature-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Página Teoria (teoria.html) */
+.theory-page {
+  background-color: var(--bg-color) !important;
+}
+
+.theory-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
 .equation-container {
   background-color: var(--card-bg);
   padding: 1.5rem;
@@ -106,7 +159,7 @@ body {
   overflow-x: auto;
 }
 
-/* Cartões */
+/* ===== COMPONENTES REUTILIZÁVEIS ===== */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -115,56 +168,18 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Cabeçalhos */
-h1, h2, h3, h4 {
-  color: var(--text-color);
-  transition: color var(--transition-time) ease;
-}
-
-/* Links */
-a {
-  color: var(--ruby-red);
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--ruby-red);
+  color: white;
+  border-radius: 4px;
   text-decoration: none;
+  transition: opacity var(--transition-time) ease;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-/* ===== LAYOUT ESPECÍFICO ===== */
-/* Página Index */
-.index-page .hero {
-  background-color: var(--card-bg);
-  padding: 3rem 2rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-/* Página Manual */
-.manual-page .feature-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Página Teoria */
-.theory-page .theory-section {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-/* ===== MATHJAX ===== */
-.mjx-chtml {
-  color: var(--text-color) !important;
-  fill: var(--text-color) !important;
-}
-
-.dark-mode .mjx-chtml {
-  filter: brightness(1.1) contrast(1.1);
+.btn:hover {
+  opacity: 0.9;
 }
 
 /* ===== RESPONSIVIDADE ===== */
@@ -179,18 +194,22 @@ a:hover {
   body {
     font-size: 0.95rem;
   }
+  
+  .theory-section,
+  .equation-container {
+    padding: 1rem;
+  }
 }
 
-/* ===== UTILITÁRIOS ===== */
-.hidden {
-  display: none !important;
+/* ===== GARANTIAS DE CONTRASTE ===== */
+.dark-mode {
+  --math-color: var(--dark-text) !important;
 }
 
-.text-center {
-  text-align: center;
-}
-
-/* Garante que o botão sempre será visível */
-#theme-toggle {
-  display: flex !important;
+/* Força cores em elementos específicos */
+.dark-mode .card,
+.dark-mode .equation-container,
+.dark-mode .theory-section {
+  background-color: var(--dark-card) !important;
+  border-color: var(--dark-border) !important;
 }
