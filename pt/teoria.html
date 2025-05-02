@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos Teóricos | Ruby Pressure Calculator</title>
+    
+    <!-- SEO e Metatags -->
+    <meta name="description" content="Base teórica completa para calibração de pressão usando espectralidade do rubi">
+    <meta name="keywords" content="espectroscopia Raman, rubi, calibração de pressão, física de alta pressão">
+    
+    <!-- Pré-carregamentos -->
+    <link rel="preload" href="../assets/css/main.css" as="style">
+        
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    
+    <!-- MathJax Config -->
+    <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    startup: {
+      ready: () => {
+        MathJax.startup.defaultReady();
+        // Força atualização quando o tema mudar
+        document.addEventListener('themeChanged', () => {
+          MathJax.typesetPromise();
+        });
+      }
+    },
+    options: {
+      renderActions: {
+        addMenu: [0, '', '']
+      }
+    }
+  };
+  </script>
+
+  <script src="../assets/js/app.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+</head>
+
+<body class="theory-page">
+    
+    <!-- Botão deve ser exatamente igual nas outras páginas -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+    <span id="theme-icon" class="theme-icon">🌙</span>
+  </button>
+    
+    <a class="skip-link" href="#main-content">Pular para conteúdo teórico</a>
+    
+    <header class="theory-header">
+        <div class="header-container">
+            <h1>Fundamentos Teóricos</h1>
+            <p class="subtitle">Base Científica do Ruby Pressure Calculator</p>
+            
+            <nav class="breadcrumb" aria-label="Navegação estrutural">
+                <ol>
+                    <li><a href="../pt/index.html">Início</a></li>
+                    <li><a href="manual.html">Manual</a></li>
+                    <li aria-current="page">Fundamentos Teóricos</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <nav class="theory-nav" aria-label="Navegação seccional">
+            <ul>
+                <li><a href="#ruby-calibration" class="nav-link">Calibração por Rubi</a></li>
+                <li><a href="#equations" class="nav-link">Sistema de Equações</a></li>
+                <li><a href="#assumptions" class="nav-link">Pressupostos</a></li>
+                <li><a href="#references" class="nav-link">Referências</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="theory-container">
+        <article>
+            <!-- Seção 1: Calibração por Rubi -->
+            <section id="ruby-calibration" class="theory-section">
+                <h2>1. Princípio da Calibração por Rubi</h2>
+                
+                <div class="theory-content">
+                    <div class="text-content">
+                        <p>O método de calibração por rubi baseia-se na dependência da pressão no deslocamento das linhas de fluorescência R₁ e R₂ do rubi (Al₂O₃:Cr³⁺). Esta técnica, desenvolvida inicialmente por <strong>Mao e Bell (1978)</strong>, explora a relação quase-linear entre pressão e o deslocamento do pico Raman.</p>
+                        
+                        <div class="key-concept">
+                            <h3>Mecanismo Físico</h3>
+                            <p>A aplicação de pressão hidrostática altera o campo cristalino ao redor dos íons Cr³⁺, modificando os níveis de energia eletrônica e consequentemente o comprimento de onda de emissão.</p>
+                        </div>
+                    </div>
+                    
+                    <figure class="theory-figure">
+                        <div class="equation-container" id="main-equation">
+                            $$ \lambda_p = \lambda_0 \left(1 + \frac{aP}{b}\right)^{1/a} $$
+                        </div>
+                        <figcaption>Equação fundamental da calibração por rubi</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="parameters-table">
+                    <table>
+                        <caption>Parâmetros da Equação de Calibração</caption>
+                        <thead>
+                            <tr>
+                                <th>Símbolo</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Unidade</th>
+                                <th>Incerteza</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$ \lambda_0 $</td>
+                                <td>Comprimento de onda a pressão zero</td>
+                                <td>694.22</td>
+                                <td>nm</td>
+                                <td>±0.03 nm</td>
+                            </tr>
+                            <tr>
+                                <td>$ a $</td>
+                                <td>Expoente de pressão</td>
+                                <td>7.665</td>
+                                <td>adimensional</td>
+                                <td>±0.008</td>
+                            </tr>
+                            <tr>
+                                <td>$ b $</td>
+                                <td>Coeficiente de pressão</td>
+                                <td>1904</td>
+                                <td>GPa</td>
+                                <td>±12 GPa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="experimental-notes">
+                    <h3>Considerações Experimentais</h3>
+                    <ul>
+                        <li>A equação é válida para condições <strong>hidrostáticas</strong> ou <strong>quase-hidrostáticas</strong></li>
+                        <li>Temperatura ambiente (20-25°C)</li>
+                        <li>Faixa de pressão: 0-500 GPa</li>
+                        <li>Dependência térmica: ~0.007 nm/°C (deve ser compensada em experimentos não-isotérmicos)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Seção 2: Sistema de Equações -->
+            <section id="equations" class="theory-section">
+                <h2>2. Sistema Completo de Equações</h2>
+                
+                <div class="equation-system">
+                    <div class="equation-card">
+                        <h3>Pressão → Número de Onda</h3>
+                        <div class="equation">
+                            $$ \lambda_p = \lambda_0 \left(1 + \frac{aP}{b}\right)^{1/a} $$
+                            $$ \nu = \left(\frac{1}{\lambda_{exc}} - \frac{1}{\lambda_p}\right) \times 10^7 $$
+                        </div>
+                        <div class="variables">
+                            <p>Onde:</p>
+                            <ul>
+                                <li>$ \nu $: Número de onda Raman (cm⁻¹)</li>
+                                <li>$ \lambda_{exc} $: Comprimento de onda do laser de excitação (nm)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="equation-card">
+                        <h3>Número de Onda → Pressão</h3>
+                        <div class="equation">
+                            $$ \lambda_p = \frac{1}{\frac{1}{\lambda_{exc}} - \frac{\nu}{10^7}} $$
+                            $$ P = \frac{b}{a} \left[\left(\frac{\lambda_p}{\lambda_0}\right)^a - 1\right] $$
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="derivation">
+                    <h3>Derivação Matemática</h3>
+                    <div class="derivation-steps">
+                        <p>Partindo da equação de estado:</p>
+                        <div class="step">
+                            $$ \frac{\Delta\lambda}{\lambda_0} = \left(1 + \frac{aP}{b}\right)^{1/a} - 1 $$
+                        </div>
+                        <p>Para pequenas pressões (P &lt; 10 GPa), aproximação linear:</p>
+                        <div class="step">
+                            $$ \Delta\lambda \approx \frac{\lambda_0}{a} \ln\left(1 + \frac{aP}{b}\right) $$
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 3: Pressupostos e Limitações -->
+            <section id="assumptions" class="theory-section">
+                <h2>3. Pressupostos e Limitações</h2>
+                
+                <div class="assumptions-grid">
+                    <div class="assumption-card">
+                        <h3>Hidrostaticidade</h3>
+                        <p>A calibração assume condições hidrostáticas. Em meios não-hidrostáticos, podem ocorrer desvios de até 5%.</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>Efeitos Térmicos</h3>
+                        <p>Variações de temperatura afetam $ \lambda_0 $. Correção térmica não está implementada no aplicativo.</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>Homogeneidade do Rubi</h3>
+                        <p>Impurezas ou defeitos cristalinos podem alterar a resposta à pressão.</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>Faixa de Validade</h3>
+                        <p>Acima de 150 GPa, a equação pode subestimar a pressão real em ~3-7%.</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-chart">
+                    <h3>Comparação com Outros Padrões</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Faixa (GPa)</th>
+                                <th>Precisão</th>
+                                <th>Vantagens</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rubi (R₁)</td>
+                                <td>0-500</td>
+                                <td>±0.5%</td>
+                                <td>Não-destrutivo, alta resolução</td>
+                            </tr>
+                            <tr>
+                                <td>XRD</td>
+                                <td>0-300</td>
+                                <td>±1%</td>
+                                <td>Direto, absoluto</td>
+                            </tr>
+                            <tr>
+                                <td>Diamante</td>
+                                <td>0-200</td>
+                                <td>±2%</td>
+                                <td>Para altas temperaturas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção 4: Referências -->
+            <section id="references" class="theory-section">
+                <h2>4. Referências Bibliográficas</h2>
+                
+                <div class="references-list">
+                    <ol class="references">
+                        <li>
+                            Mao, H.K., Xu, J., & Bell, P.M. (1986). <em>Calibration of the ruby pressure gauge to 800 kbar under quasi-hydrostatic conditions</em>. Journal of Geophysical Research, 91(B5), 4673-4676.
+                            <span class="doi">DOI: 10.1029/JB091iB05p04673</span>
+                        </li>
+                        <li>
+                            Dewaele, A., et al. (2004). <em>Quasihydrostatic equation of state of iron above 2 Mbar</em>. Physical Review Letters, 93(21), 215504.
+                        </li>
+                        <li>
+                            Holzapfel, W.B. (2003). <em>Refinements in the ruby pressure scale</em>. Journal of Applied Physics, 93(3), 1813-1818.
+                        </li>
+                    </ol>
+                    
+                    <div class="additional-resources">
+                        <h3>Recursos Adicionais</h3>
+                        <ul>
+                            <li><a href="https://www.mindat.org/min-3486.html" target="_blank">Propriedades mineralógicas do rubi</a></li>
+                            <li><a href="https://www.nist.gov/pml" target="_blank">Padrões NIST para alta pressão</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer class="theory-footer">
+        <div class="footer-content">
+            <div class="footer-actions">
+                <a href="../pt/manual.html" class="footer-button">Voltar ao Manual</a>
+                <a href="../index.html" class="footer-button">Página Inicial</a>
+            </div>
+            
+            <div class="footer-meta">
+                <p>Última atualização teórica: <time datetime="2023-11-20">20/11/2023</time></p>
+                <p>Versão do conteúdo: 2.1.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    
+    <script>
+        // Controle de navegação seccional
+        document.querySelectorAll('.theory-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Atualiza a URL sem recarregar
+                history.pushState(null, null, targetId);
+            });
+        });
+    </script>
+</body>
+</html>
