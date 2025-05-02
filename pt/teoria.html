@@ -32,32 +32,28 @@
     
     <!-- MathJax Config -->
     <script>
-    window.MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            tags: 'ams',
-            packages: {'[+]': ['physics', 'color']}
-        },
-        loader: {load: ['[tex]/physics', '[tex]/color']},
-        options: {
-            enableMenu: false,
-            menuOptions: {
-                settings: {
-                    zoom: 'None'
-                }
-            }
-        },
-        startup: {
-            ready: () => {
-                MathJax.startup.defaultReady();
-                document.addEventListener('themeChanged', () => {
-                    MathJax.typesetPromise();
-                });
-            }
-        }
-    };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    startup: {
+      ready: () => {
+        MathJax.startup.defaultReady();
+        // Força atualização quando o tema mudar
+        document.addEventListener('themeChanged', () => {
+          MathJax.typesetPromise();
+        });
+      }
+    },
+    options: {
+      renderActions: {
+        addMenu: [0, '', '']
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 </head>
 
 <body class="theory-page">
