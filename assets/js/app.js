@@ -3,11 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   
-  // Verifica o tema atual
-  function getCurrentTheme() {
+  // Verifica e aplica o tema inicial
+  function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return savedTheme ? savedTheme === 'dark' : systemDark;
+    const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+    applyTheme(isDark);
   }
   
   // Aplica o tema
@@ -20,25 +21,28 @@ document.addEventListener('DOMContentLoaded', function() {
       themeIcon.textContent = isDark ? '☀️' : '🌙';
     }
     
-    // Atualiza imagens sensíveis ao tema
-    document.querySelectorAll('.theme-sensitive-img').forEach(img => {
-      img.style.display = (img.dataset.theme === (isDark ? 'dark' : 'light')) ? 'block' : 'none';
-    });
+    // Atualiza MathJax se existir
+    if (typeof MathJax !== 'undefined') {
+      MathJax.typesetPromise().then(() => {
+        document.querySelectorAll('.mjx-chtml').forEach(el => {
+          el.style.color = isDark ? '#f8f9fa' : '#333333';
+        });
+      });
+    }
   }
   
-  // Inicializa o tema
-  applyTheme(getCurrentTheme());
-  
-  // Configura o botão de tema
+  // Configura o botão
   if (themeToggle) {
-    themeToggle.style.display = 'flex'; // Garante que está visível
     themeToggle.addEventListener('click', () => {
       const isDark = !document.documentElement.classList.contains('dark-mode');
       applyTheme(isDark);
     });
   }
   
-  // Responde a mudanças no tema do sistema
+  // Inicializa
+  initTheme();
+  
+  // Observa mudanças no tema do sistema
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('theme')) {
       applyTheme(e.matches);
