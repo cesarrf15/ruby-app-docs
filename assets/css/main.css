@@ -1,12 +1,18 @@
+/* ===== VARIÁVEIS E CONFIGURAÇÕES GERAIS ===== */
 :root {
+    /* Cores Light Mode */
     --bg-color: #ffffff;
     --text-color: #333333;
     --card-bg: #f9f9f9;
     --border-color: #dddddd;
     --ruby-red: #9b111e;
+    
+    /* Transições */
+    --transition-time: 0.3s;
 }
 
 .dark-mode {
+    /* Cores Dark Mode */
     --bg-color: #121212;
     --text-color: #f0f0f0;
     --card-bg: #1e1e1e;
@@ -14,87 +20,10 @@
     --ruby-red: #ff4d4d;
 }
 
-/* Aplique as variáveis a TODOS elementos */
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-/* Botão de tema */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.theme-icon {
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-}
-
-.theme-toggle:hover .theme-icon {
-    transform: scale(1.2);
-}
-
-
-/* Garanta que estas variáveis estejam no :root */
-:root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --card-bg: #f9f9f9;
-    --border-color: #dddddd;
-    --ruby-red: #9b111e;
-}
-
-.dark-mode {
-    --bg-color: #121212;
-    --text-color: #f0f0f0;
-    --card-bg: #1e1e1e;
-    --border-color: #444444;
-    --ruby-red: #ff4d4d;
-}
-
-/* Estilo do botão */
-#theme-toggle {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: none; /* Será mostrado via JS */
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-}
-/* Aplicação padrão (Light Mode) */
-
-/* Adicione no início do seu main.css */
-html, body {
+/* ===== ELEMENTOS BASE ===== */
+html {
+    scroll-behavior: smooth;
     min-height: 100%;
-}
-
-body {
-    background-color: var(--bg-color) !important;
-    color: var(--text-color) !important;
-}
-
-/* Garanta que todos os elementos herdem as cores */
-body, body * {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
@@ -102,176 +31,21 @@ body {
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background 0.3s, color 0.3s;
+    transition: background-color var(--transition-time) ease, 
+                color var(--transition-time) ease;
 }
 
-/* Dark Mode via classe */
-body.dark-mode {
-    --bg-color: var(--dark-bg);
-    --text-color: var(--dark-text);
-    --card-bg: var(--dark-card);
-    --border-color: var(--dark-border);
+* {
+    transition: background-color var(--transition-time) ease, 
+                color var(--transition-time) ease, 
+                border-color var(--transition-time) ease;
 }
 
-.manual img {
-    max-width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background: var(--dark-bg);
-        color: #f0f0f0;
-    }
-}
-
-/* Componentes que usam as variáveis */
-.card, .equation {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-}
-
-img {
-    border-color: var(--border-color);
-}
-
-.diagram {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1.5rem auto;
-    border: 1px solid #ddd;
-}
-
-.references {
-    font-size: 0.9rem;
-    border-top: 1px solid #eee;
-    padding-top: 1rem;
-    margin-top: 2rem;
-}
-
-#theme-toggle {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 100;
-}
-
-
-/* Adicione ao seu main.css */
-.language-notice {
-    background: #f8f9fa;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    font-size: 0.9em;
-}
-
-[lang] {
-    transition: all 0.3s ease;
-}
-
-/* Esconde elementos de outros idiomas */
-body:not([lang="pt"]) [lang="pt"],
-body:not([lang="en"]) [lang="en"] {
-    display: none;
-}
-
-/* Ajuste responsivo para texto */
-body {
-    font-size: 1rem; /* Tamanho base */
-}
-
-@media (min-width: 768px) { /* Tablets/notebooks */
-    body {
-        font-size: 1.1rem;
-        line-height: 1.8;
-    }
-    
-    h2 {
-        font-size: 1.8rem;
-    }
-}
-
-@media (min-width: 1200px) { /* Telas grandes */
-    body {
-        font-size: 1.2rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .screenshot {
-        max-width: min(100%, 500px); /* Um pouco maior em telas médias */
-    }
-}
-
-@media (max-width: 767px) {
-    #theme-toggle {
-        font-size: 2rem; /* Ícone maior */
-        top: 15px;
-        right: 15px;
-    }
-}
-
-/* Estilos para MathJax */
-.mjx-chtml {
-    color: var(--text-color) !important;
-    fill: var(--text-color) !important;
-}
-
-.dark-mode .mjx-chtml {
-    opacity: 0.9; /* Aumenta contraste no dark mode */
-}
-
-/* Garanta que o container não está escondendo a imagem */
-.image-container {
-    position: relative;
-    min-height: auto; /* Remova altura fixa */
-    background: transparent; /* Remove fundo do container */
-    text-align: center; /* Centraliza a imagem */
-}
-
-
-.screenshot {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1.5rem auto;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    /* Remova qualquer opacity/transition aqui */
-}
-
-/* Garante contraste em ambos os temas */
-.mjx-chtml {
-    color: var(--text-color) !important;
-    fill: var(--text-color) !important;
-    opacity: 1 !important;
-}
-
-.dark-mode .mjx-chtml {
-    filter: contrast(1.2) brightness(1.1);
-}
-
-/* Container especial para equações */
-.equation-container {
-    padding: 1.5rem;
-    margin: 2rem 0;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    overflow-x: auto;
-}
-
-/* Adicione ao seu main.css */
+/* ===== SISTEMA DE TEMA ===== */
 .theme-toggle {
     position: fixed;
-    top: 1rem;
-    right: 1rem;
+    top: 20px;
+    right: 20px;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 50%;
@@ -287,75 +61,25 @@ body {
 
 .theme-icon {
     font-size: 1.2rem;
+    transition: transform var(--transition-time) ease;
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-}
-
-.gallery-grid figure {
-    margin: 0;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.gallery-grid figure:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.gallery-grid img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 9/16;
-    object-fit: contain;
-    background: var(--card-bg);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.gallery-grid figcaption {
-    padding: 0.8rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--text-color);
-    background: var(--card-bg);
-}
-
-.error {
-    color: var(--ruby-red);
-    padding: 1rem;
-    border: 1px dashed var(--ruby-red);
-}
-
-/* Garantia de que o tema será aplicado corretamente */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Transições suaves para o tema */
-body, body * {
-    transition: background-color 0.3s ease, 
-                color 0.3s ease, 
-                border-color 0.3s ease;
+.theme-toggle:hover .theme-icon {
+    transform: scale(1.2);
 }
 
 /* Imagens sensíveis ao tema */
 .theme-sensitive-img {
     display: none;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-time) ease;
 }
 
 .theme-sensitive-img[data-theme="light"] {
-    display: var(--light-display, block);
+    display: block;
 }
 
 .theme-sensitive-img[data-theme="dark"] {
-    display: var(--dark-display, none);
+    display: none;
 }
 
 .dark-mode .theme-sensitive-img[data-theme="light"] {
@@ -366,8 +90,72 @@ body, body * {
     display: block;
 }
 
-/* Garante que o botão de tema seja visível */
-#theme-toggle {
-    display: flex !important;
+/* ===== COMPONENTES COMUNS ===== */
+.card, .equation-container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
 }
 
+img:not(.theme-sensitive-img) {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* ===== LAYOUT ESPECÍFICO ===== */
+/* Header */
+.hero {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Seções */
+.section {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Rodapé */
+.main-footer {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 767px) {
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+    }
+    
+    body {
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== COMPONENTES ESPECÍFICOS ===== */
+/* Para MathJax */
+.mjx-chtml {
+    color: var(--text-color) !important;
+    fill: var(--text-color) !important;
+}
+
+.dark-mode .mjx-chtml {
+    filter: contrast(1.2) brightness(1.1);
+}
+
+/* Mensagens de erro */
+.error {
+    color: var(--ruby-red);
+    padding: 1rem;
+    border: 1px dashed var(--ruby-red);
+    border-radius: 4px;
+}
