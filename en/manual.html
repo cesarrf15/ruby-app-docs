@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Advanced Theme Control -->
+    <script>
+        // Instant theme application before rendering
+        (function(){
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+            
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            window.currentTheme = isDark ? 'dark' : 'light';
+            document.documentElement.style.setProperty('--light-display', isDark ? 'none' : 'block');
+            document.documentElement.style.setProperty('--dark-display', isDark ? 'block' : 'none');
+        })();
+    </script>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Manual | Ruby Pressure Calculator</title>
+    
+    <!-- SEO and Metadata -->
+    <meta name="description" content="Complete manual for Ruby Pressure Calculator for precise conversion between pressure and Raman wavenumber">
+    <meta name="keywords" content="ruby pressure, DAC calculation, Raman spectroscopy, user manual">
+    
+    <!-- Preloads -->
+    <link rel="preload" href="/ruby-app-docs/assets/css/main.css" as="style">
+    <link rel="preload" href="/ruby-app-docs/assets/js/app.js" as="script">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/manual.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/ruby-app-docs/assets/img/favicon.ico" sizes="any">
+    <link rel="icon" href="/ruby-app-docs/assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/ruby-app-docs/assets/img/apple-touch-icon.png">
+    
+    <style>
+        /* Smooth transition for theme-sensitive images */
+        .theme-sensitive-img {
+            transition: opacity 0.4s ease;
+        }
+        .theme-sensitive-img[data-theme="light"] {
+            display: var(--light-display, block);
+        }
+        .theme-sensitive-img[data-theme="dark"] {
+            display: var(--dark-display, none);
+        }
+        .dark-mode .theme-sensitive-img[data-theme="light"] {
+            display: none;
+        }
+        .dark-mode .theme-sensitive-img[data-theme="dark"] {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="manual-page">
+    <!-- Accessible Theme Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" aria-live="polite">
+        <span id="theme-icon" class="theme-icon">🌙</span>
+    </button>
+
+    <header class="manual-header">
+        <div class="header-container">
+            <h1>Ruby Pressure Calculator</h1>
+            <p class="subtitle">Complete User Manual</p>
+            
+            <nav class="breadcrumb" aria-label="Structural navigation">
+                <ol>
+                    <li><a href="../en/index.html">Home</a></li>
+                    <li aria-current="page">Manual</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <nav class="activity-nav" aria-label="Main navigation">
+            <ul>
+                <li><a href="#main-activity" class="nav-btn active" data-section="main">Home Screen</a></li>
+                <li><a href="#pressure-converter" class="nav-btn" data-section="pressure">Pressure→Wavenumber</a></li>
+                <li><a href="#wavenumber-converter" class="nav-btn" data-section="wavenumber">Wavenumber→Pressure</a></li>
+                <li><a href="#data-management" class="nav-btn" data-section="data">Data Management</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="manual-container">
+        <!-- MainActivity Section -->
+        <section id="main-activity" class="activity-section visible">
+            <h2>Home Screen</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="screenshot-container">
+                        <img src="/ruby-app-docs/assets/img/screenshots/main-activity/light/full.webp" 
+                             alt="Main screen in light mode showing both conversion modes"
+                             class="theme-sensitive-img"
+                             data-theme="light"
+                             loading="lazy">
+                        <img src="/ruby-app-docs/assets/img/screenshots/main-activity/dark/full.webp" 
+                             alt="Main screen in dark mode"
+                             class="theme-sensitive-img"
+                             data-theme="dark"
+                             loading="lazy">
+                    </div>
+                    
+                    <div class="feature-details">
+                        <h3>Basic Navigation</h3>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="icon">🔄</span>
+                                <strong>Switch between modes:</strong> Tap the main buttons to toggle between conversion functions
+                            </li>
+                            <li>
+                                <span class="icon">🌓</span>
+                                <strong>Visual theme:</strong> The button in the top right corner toggles between light and dark modes
+                            </li>
+                            <li>
+                                <span class="icon">🌐</span>
+                                <strong>Language:</strong> The globe icon allows selection between 5 available languages
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feature-card reverse">
+                    <div class="feature-details">
+                        <h3>Top Controls</h3>
+                        <div class="controls-detail">
+                            <div class="screenshot-container">
+                                <img src="/ruby-app-docs/assets/img/screenshots/main-activity/light/controls.webp" 
+                                     alt="Detail of top control bar in light mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="/ruby-app-docs/assets/img/screenshots/main-activity/dark/controls.webp" 
+                                     alt="Detail of top control bar in dark mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <ol class="controls-list">
+                                <li><strong>Theme:</strong> Toggles between light and dark colors</li>
+                                <li><strong>Language:</strong> Language selection menu</li>
+                                <li><strong>Help:</strong> Quick access to this manual</li>                                
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PressureToWavenumber Section -->
+        <section id="pressure-converter" class="activity-section">
+            <h2>Pressure to Wavenumber Conversion</h2>
+            
+            <div class="converter-grid">
+                <div class="converter-details">
+                    <h3>Detailed Operation</h3>
+                    
+                    <div class="parameter-section">
+                        <h4>Laser Setup</h4>
+                        <div class="parameter-content">
+                            <div class="screenshot-container">
+                                <img src="/ruby-app-docs/assets/img/screenshots/pressure-converter/light/laser-selection.webp" 
+                                     alt="Excitation laser selection menu in light mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="/ruby-app-docs/assets/img/screenshots/pressure-converter/dark/laser-selection.webp" 
+                                     alt="Excitation laser selection menu in dark mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <div class="parameter-desc">
+                                <p>Select the wavelength of the laser used in your experiment:</p>
+                                <ul>
+                                    <li><strong>488nm:</strong> Argon-ion laser</li>
+                                    <li><strong>514.5nm:</strong> Gold standard for ruby</li>
+                                    <li><strong>532nm:</strong> Solid-state laser</li>
+                                    <li><strong>633nm:</strong> HeNe laser</li>
+                                    <li><strong>785nm:</strong> For special measurements</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="parameter-section">
+                        <h4>Pressure Input</h4>
+                        <div class="parameter-content reverse">
+                            <div class="parameter-desc">
+                                <p>Enter the pressure value in <strong>Gigapascals (GPa)</strong>:</p>
+                                <ul>
+                                    <li>Valid range: 0 to 500 GPa</li>
+                                    <li>Use dot or comma as decimal separator</li>
+                                    <li>Calculation is performed automatically</li>
+                                </ul>
+                            </div>
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/pressure-converter/light/input-field.webp" 
+                                     alt="Pressure input field in light mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/pressure-converter/dark/input-field.webp" 
+                                     alt="Pressure input field in dark mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="converter-features">
+                    <h3>Advanced Features</h3>
+                    
+                    <div class="feature-box">
+                        <h4>Calibration Adjustment</h4>
+                        <div class="feature-content">
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/pressure-converter/light/offset-adjust.webp" 
+                                     alt="Fine adjustment controls in light mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/pressure-converter/dark/offset-adjust.webp" 
+                                     alt="Fine adjustment controls in dark mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <div class="feature-desc">
+                                <p>Compensate for instrumental variations with fine adjustment:</p>
+                                <ol>
+                                    <li>Select the desired laser</li>
+                                    <li>Use <strong>+</strong> and <strong>-</strong> buttons to adjust</li>
+                                    <li>The value is automatically saved per laser</li>
+                                </ol>
+                                <p class="note">Note: Default adjustment is 0.0 cm⁻¹</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WavenumberToPressure Section -->
+        <section id="wavenumber-converter" class="activity-section">
+            <h2>Wavenumber to Pressure Conversion</h2>
+            
+            <div class="converter-grid">
+                <div class="converter-details">
+                    <h3>Detailed Operation</h3>
+                    
+                    <div class="parameter-section">
+                        <h4>Wavenumber Input</h4>
+                        <div class="parameter-content">
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/wavenumber-converter/light/input-field.webp" 
+                                     alt="Input field in light mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/wavenumber-converter/dark/input-field.webp" 
+                                     alt="Input field in dark mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <div class="parameter-desc">
+                                <p>Enter the Raman wavenumber in <strong>cm⁻¹</strong>:</p>
+                                <ul>
+                                    <li>Valid range varies according to selected laser</li>
+                                    <li>For 785nm laser, negative values are accepted</li>
+                                    <li>Calculation is performed automatically</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="converter-features">
+                    <h3>Automatic Validation</h3>
+                    
+                    <div class="feature-box">
+                        <div class="feature-content reverse">
+                            <div class="feature-desc">
+                                <p>The app automatically verifies:</p>
+                                <ul>
+                                    <li>If the value is within the possible range</li>
+                                    <li>If it would result in valid pressure (0-500 GPa)</li>
+                                    <li>Shows clear messages for invalid values</li>
+                                </ul>
+                            </div>
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/wavenumber-converter/light/validation.webp" 
+                                     alt="Validation message in light mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/wavenumber-converter/dark/validation.webp" 
+                                     alt="Validation message in dark mode"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Management Section -->
+        <section id="data-management" class="activity-section">
+            <h2>Data Management</h2>
+            
+            <div class="data-features">
+                <div class="data-card">
+                    <h3>Calculation History</h3>
+                    <div class="data-content">
+                        <div class="screenshot-container">
+                            <img src="../assets/img/screenshots/data-management/light/history.webp" 
+                                 alt="Calculation history in light mode"
+                                 class="theme-sensitive-img"
+                                 data-theme="light"
+                                 loading="lazy">
+                            <img src="../assets/img/screenshots/data-management/dark/history.webp" 
+                                 alt="Calculation history in dark mode"
+                                 class="theme-sensitive-img"
+                                 data-theme="dark"
+                                 loading="lazy">
+                        </div>
+                        
+                        <div class="data-desc">
+                            <ul>
+                                <li>Stores up to 50 recent conversions</li>
+                                <li>Format: Pressure (GPa) → Wavenumber (cm⁻¹)</li>
+                                <li>Automatically cleared when restarting the app</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <h3>Import/Export</h3>
+                    <div class="data-content reverse">
+                        <div class="data-desc">
+                            <ul>
+                                <li><strong>Export:</strong> Saves to .txt file in Downloads folder</li>
+                                <li><strong>Import:</strong> Loads data from previous .txt files</li>
+                                <li>Format compatible with analysis in other software</li>
+                            </ul>
+                        </div>
+                        <div class="screenshot-container">
+                            <img src="../assets/img/screenshots/data-management/light/import-export.webp" 
+                                 alt="Import/export options in light mode"
+                                 class="theme-sensitive-img"
+                                 data-theme="light"
+                                 loading="lazy">
+                            <img src="../assets/img/screenshots/data-management/dark/import-export.webp" 
+                                 alt="Import/export options in dark mode"
+                                 class="theme-sensitive-img"
+                                 data-theme="dark"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="manual-footer">
+        <div class="footer-content">
+            <div class="footer-actions">
+                <a href="teoria.html" class="footer-button">Theoretical Foundations</a>
+                <a href="../index.html" class="footer-button">Home Page</a>
+            </div>
+            
+            <div class="footer-meta">
+                <p>App version: 2.1.0</p>
+                <p>Last update: <time datetime="2023-11-20">11/20/2023</time></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/ruby-app-docs/assets/js/app.js"></script>
+    <script>
+    // Complete Theme Management System
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // 1. Initial Setup
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        // 2. Update icon according to current theme
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeToggle.setAttribute('aria-label', theme === 'dark' ? 
+                                  'Switch to light theme' : 'Switch to dark theme');
+        }
+        
+        // 3. Theme Toggler
+        themeToggle.addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            const newTheme = isDark ? 'dark' : 'light';
+            
+            // Update storage and variables
+            localStorage.setItem('theme', newTheme);
+            window.currentTheme = newTheme;
+            
+            // Update interface
+            updateThemeIcon(newTheme);
+            
+            // Update CSS properties
+            document.documentElement.style.setProperty('--light-display', isDark ? 'none' : 'block');
+            document.documentElement.style.setProperty('--dark-display', isDark ? 'block' : 'none');
+            
+            // Dispatch event for reactive components
+            document.dispatchEvent(new CustomEvent('themeChanged', { 
+                detail: { theme: newTheme }
+            }));
+        });
+        
+        // 4. Listener for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) { // Only changes if no saved preference
+                const newTheme = e.matches ? 'dark' : 'light';
+                document.documentElement.classList.toggle('dark-mode', e.matches);
+                updateThemeIcon(newTheme);
+                document.documentElement.style.setProperty('--light-display', e.matches ? 'none' : 'block');
+                document.documentElement.style.setProperty('--dark-display', e.matches ? 'block' : 'none');
+            }
+        });
+        
+        // 5. Initialization
+        updateThemeIcon(currentTheme);
+        
+        // 6. Section Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = this.getAttribute('href');
+                
+                // Hide all sections
+                document.querySelectorAll('.activity-section').forEach(section => {
+                    section.classList.remove('visible');
+                });
+                
+                // Show target section
+                document.querySelector(targetSection).classList.add('visible');
+                
+                // Update navigation
+                document.querySelectorAll('.nav-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Smooth scrolling
+                document.querySelector(targetSection).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>
