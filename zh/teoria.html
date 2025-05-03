@@ -1,1 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理论基础 | 红宝石压力计算器</title>
+    
+    <!-- SEO和元标签 -->
+    <meta name="description" content="使用红宝石光谱进行压力校准的完整理论基础">
+    <meta name="keywords" content="拉曼光谱, 红宝石, 压力校准, 高压物理">
+    
+    <!-- 预加载 -->
+    <link rel="preload" href="../assets/css/main.css" as="style">
+        
+    <!-- 样式 -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    
+    <!-- MathJax配置 -->
+    <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    startup: {
+      ready: () => {
+        MathJax.startup.defaultReady();
+        // 主题改变时强制更新
+        document.addEventListener('themeChanged', () => {
+          MathJax.typesetPromise();
+        });
+      }
+    },
+    options: {
+      renderActions: {
+        addMenu: [0, '', '']
+      }
+    }
+  };
+  </script>
 
+  <script src="../assets/js/app.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+</head>
+
+<body class="theory-page">
+    
+    <!-- 按钮应与其他页面相同 -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+    <span id="theme-icon" class="theme-icon">🌙</span>
+  </button>
+    
+    <a class="skip-link" href="#main-content">跳转到理论内容</a>
+    
+    <header class="theory-header">
+        <div class="header-container">
+            <h1>理论基础</h1>
+            <p class="subtitle">红宝石压力计算器的科学基础</p>
+            
+            <nav class="breadcrumb" aria-label="结构导航">
+                <ol>
+                    <li><a href="../zh/index.html">首页</a></li>
+                    <li><a href="manual.html">用户手册</a></li>
+                    <li aria-current="page">理论基础</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <nav class="theory-nav" aria-label="章节导航">
+            <ul>
+                <li><a href="#ruby-calibration" class="nav-link">红宝石校准</a></li>
+                <li><a href="#equations" class="nav-link">方程系统</a></li>
+                <li><a href="#assumptions" class="nav-link">假设条件</a></li>
+                <li><a href="#references" class="nav-link">参考文献</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="theory-container">
+        <article>
+            <!-- 第1节: 红宝石校准 -->
+            <section id="ruby-calibration" class="theory-section">
+                <h2>1. 红宝石校准原理</h2>
+                
+                <div class="theory-content">
+                    <div class="text-content">
+                        <p>红宝石校准方法基于红宝石(Al₂O₃:Cr³⁺)中R₁和R₂荧光谱线位移的压力依赖性。该技术最初由<strong>Mao和Bell(1978)</strong>开发，利用了压力与拉曼峰位移之间的准线性关系。</p>
+                        
+                        <div class="key-concept">
+                            <h3>物理机制</h3>
+                            <p>静水压力的施加改变了Cr³⁺离子周围的晶体场，从而改变了电子能级，进而改变了发射波长。</p>
+                        </div>
+                    </div>
+                    
+                    <figure class="theory-figure">
+                        <div class="equation-container" id="main-equation">
+                            $$ \lambda_p = \lambda_0 \left(1 + \frac{aP}{b}\right)^{1/a} $$
+                        </div>
+                        <figcaption>红宝石校准基本方程</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="parameters-table">
+                    <table>
+                        <caption>校准方程参数</caption>
+                        <thead>
+                            <tr>
+                                <th>符号</th>
+                                <th>描述</th>
+                                <th>值</th>
+                                <th>单位</th>
+                                <th>不确定度</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$ \lambda_0 $</td>
+                                <td>零压力波长</td>
+                                <td>694.22</td>
+                                <td>nm</td>
+                                <td>±0.03 nm</td>
+                            </tr>
+                            <tr>
+                                <td>$ a $</td>
+                                <td>压力指数</td>
+                                <td>7.665</td>
+                                <td>无量纲</td>
+                                <td>±0.008</td>
+                            </tr>
+                            <tr>
+                                <td>$ b $</td>
+                                <td>压力系数</td>
+                                <td>1904</td>
+                                <td>GPa</td>
+                                <td>±12 GPa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="experimental-notes">
+                    <h3>实验注意事项</h3>
+                    <ul>
+                        <li>方程适用于<strong>静水</strong>或<strong>准静水</strong>条件</li>
+                        <li>室温(20-25°C)</li>
+                        <li>压力范围: 0-500 GPa</li>
+                        <li>热依赖性: ~0.007 nm/°C(非等温实验中应补偿)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 第2节: 方程系统 -->
+            <section id="equations" class="theory-section">
+                <h2>2. 完整方程系统</h2>
+                
+                <div class="equation-system">
+                    <div class="equation-card">
+                        <h3>压力 → 波数</h3>
+                        <div class="equation">
+                            $$ \lambda_p = \lambda_0 \left(1 + \frac{aP}{b}\right)^{1/a} $$
+                            $$ \nu = \left(\frac{1}{\lambda_{exc}} - \frac{1}{\lambda_p}\right) \times 10^7 $$
+                        </div>
+                        <div class="variables">
+                            <p>其中:</p>
+                            <ul>
+                                <li>$ \nu $: 拉曼波数(cm⁻¹)</li>
+                                <li>$ \lambda_{exc} $: 激发激光波长(nm)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="equation-card">
+                        <h3>波数 → 压力</h3>
+                        <div class="equation">
+                            $$ \lambda_p = \frac{1}{\frac{1}{\lambda_{exc}} - \frac{\nu}{10^7}} $$
+                            $$ P = \frac{b}{a} \left[\left(\frac{\lambda_p}{\lambda_0}\right)^a - 1\right] $$
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="derivation">
+                    <h3>数学推导</h3>
+                    <div class="derivation-steps">
+                        <p>从状态方程开始:</p>
+                        <div class="step">
+                            $$ \frac{\Delta\lambda}{\lambda_0} = \left(1 + \frac{aP}{b}\right)^{1/a} - 1 $$
+                        </div>
+                        <p>对于小压力(P &lt; 10 GPa)，线性近似:</p>
+                        <div class="step">
+                            $$ \Delta\lambda \approx \frac{\lambda_0}{a} \ln\left(1 + \frac{aP}{b}\right) $$
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第3节: 假设与限制 -->
+            <section id="assumptions" class="theory-section">
+                <h2>3. 假设与限制</h2>
+                
+                <div class="assumptions-grid">
+                    <div class="assumption-card">
+                        <h3>静水性</h3>
+                        <p>校准假设静水条件。在非静水介质中，可能会出现高达5%的偏差。</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>热效应</h3>
+                        <p>温度变化会影响$ \lambda_0 $。应用中未实现热校正。</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>红宝石均匀性</h3>
+                        <p>杂质或晶体缺陷可能会改变压力响应。</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>有效范围</h3>
+                        <p>超过150 GPa，方程可能会低估实际压力约3-7%。</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-chart">
+                    <h3>与其他标准的比较</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>方法</th>
+                                <th>范围(GPa)</th>
+                                <th>精度</th>
+                                <th>优势</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>红宝石(R₁)</td>
+                                <td>0-500</td>
+                                <td>±0.5%</td>
+                                <td>非破坏性，高分辨率</td>
+                            </tr>
+                            <tr>
+                                <td>XRD</td>
+                                <td>0-300</td>
+                                <td>±1%</td>
+                                <td>直接，绝对</td>
+                            </tr>
+                            <tr>
+                                <td>金刚石</td>
+                                <td>0-200</td>
+                                <td>±2%</td>
+                                <td>适用于高温</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 第4节: 参考文献 -->
+            <section id="references" class="theory-section">
+                <h2>4. 参考文献</h2>
+                
+                <div class="references-list">
+                    <ol class="references">
+                        <li>
+                            Mao, H.K., Xu, J., & Bell, P.M. (1986). <em>准静水条件下红宝石压力计至800千巴的校准</em>. Journal of Geophysical Research, 91(B5), 4673-4676.
+                            <span class="doi">DOI: 10.1029/JB091iB05p04673</span>
+                        </li>
+                        <li>
+                            Dewaele, A., 等. (2004). <em>2兆巴以上铁的准静水状态方程</em>. Physical Review Letters, 93(21), 215504.
+                        </li>
+                        <li>
+                            Holzapfel, W.B. (2003). <em>红宝石压力尺度的改进</em>. Journal of Applied Physics, 93(3), 1813-1818.
+                        </li>
+                    </ol>
+                    
+                    <div class="additional-resources">
+                        <h3>附加资源</h3>
+                        <ul>
+                            <li><a href="https://www.mindat.org/min-3486.html" target="_blank">红宝石矿物学特性</a></li>
+                            <li><a href="https://www.nist.gov/pml" target="_blank">NIST高压标准</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer class="theory-footer">
+        <div class="footer-content">
+            <div class="footer-actions">
+                <a href="../zh/manual.html" class="footer-button">返回手册</a>
+                <a href="../index.html" class="footer-button">首页</a>
+            </div>
+            
+            <div class="footer-meta">
+                <p>最后理论更新: <time datetime="2023-11-20">2023年11月20日</time></p>
+                <p>内容版本: 2.1.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    
+    <script>
+        // 章节导航控制
+        document.querySelectorAll('.theory-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // 更新URL而不重新加载
+                history.pushState(null, null, targetId);
+            });
+        });
+    </script>
+</body>
+</html>
