@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// ADVANCED theme control (must be the FIRST script in <head>)
+(function(){
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+    
+    // 1. Apply class to HTML immediately
+    document.documentElement.classList.toggle('dark-mode', isDark);
+    
+    // 2. Set CSS variables for PRE-RENDER control
+    const style = document.createElement('style');
+    style.textContent = `
+      .theme-sensitive-img[data-theme="light"] {
+        display: ${isDark ? 'none' : 'block'} !important;
+      }
+      .theme-sensitive-img[data-theme="dark"] {
+        display: ${isDark ? 'block' : 'none'} !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // 3. Remove style after full load
+    window.addEventListener('load', () => style.remove());
+})();
+</script>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby Pressure Calculator</title>
+    
+    <!-- SEO and Metadata -->
+    <meta name="description" content="App for precise conversion between hydrostatic pressure and Raman wavenumber using ruby calibration">
+    <meta name="keywords" content="ruby pressure, DAC calculation, Raman spectroscopy, high pressure">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
+    <link rel="preload" href="/ruby-app-docs/assets/css/main.css" as="style">    
+    
+    <!-- Preload for better performance -->
+    <link rel="preload" href="/ruby-app-dcos/assets/js/app.js" as="script">
+</head>
+
+<body class="index-page">   
+    <!-- Accessible Theme Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" aria-live="polite">
+    <span id="theme-icon" class="theme-icon">🌙</span>
+    </button>
+
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Ruby Pressure Calculator</h1>
+                <p class="subtitle">Precise scientific conversion between pressure and Raman spectroscopy</p>
+                
+                <div class="hero-buttons">
+                    <a href="manual.html" class="btn primary">
+                        <span class="icon">📖</span> User Manual
+                    </a>
+                    <a href="teoria.html" class="btn secondary">
+                        <span class="icon">🔬</span> Theoretical Foundations
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="screenshot-container">
+                    <img src="/ruby-app-docs/assets/img/screenshots/main-activity/light/full.webp" 
+                         alt="Main app screen showing conversion modes"
+                         class="theme-sensitive-img"
+                         data-theme="light"
+                         loading="lazy">
+                    <img src="/ruby-app-docs/assets/img/screenshots/main-activity/dark/full.webp" 
+                         alt="Main screen in dark mode"
+                         class="theme-sensitive-img"
+                         data-theme="dark"
+                         loading="lazy"
+                         style="display: none;">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="features">
+        <section class="feature-section">
+            <h2 class="section-title">Key Features</h2>
+            
+            <div class="feature-grid">
+                <!-- Card 1 -->
+                <div class="feature-card">
+                    <div class="card-icon">🔄</div>
+                    <h3>Bidirectional Conversion</h3>
+                    <ul class="feature-list">
+                        <li>Pressure → Wavenumber</li>
+                        <li>Wavenumber → Pressure</li>
+                        <li>Scientifically validated algorithms</li>
+                    </ul>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="feature-card">
+                    <div class="card-icon">💎</div>
+                    <h3>Multiple Lasers</h3>
+                    <ul class="feature-list">
+                        <li>488nm (Argon-ion)</li>
+                        <li>514.5nm (Gold standard)</li>
+                        <li>532nm (Solid-state)</li>
+                        <li>633nm (HeNe)</li>
+                        <li>785nm (Special applications)</li>
+                    </ul>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="feature-card">
+                    <div class="card-icon">🌐</div>
+                    <h3>Multilingual Support</h3>
+                    <ul class="feature-list">
+                        <li>Portuguese</li>
+                        <li>English</li>
+                        <li>Spanish</li>
+                        <li>Russian</li>
+                        <li>Chinese</li>
+                    </ul>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="feature-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Data Management</h3>
+                    <ul class="feature-list">
+                        <li>Calculation history</li>
+                        <li>Export to TXT files</li>
+                        <li>Data import</li>
+                        <li>Excel/Origin compatible</li>
+                    </ul>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="feature-card">
+                    <div class="card-icon">🎚️</div>
+                    <h3>Fine Adjustment</h3>
+                    <ul class="feature-list">
+                        <li>Custom calibration</li>
+                        <li>Adjustable offset</li>
+                        <li>Per-laser settings</li>
+                    </ul>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="feature-card">
+                    <div class="card-icon">🌓</div>
+                    <h3>Adaptive Interface</h3>
+                    <ul class="feature-list">
+                        <li>Light and dark themes</li>
+                        <li>Responsive design</li>
+                        <li>Landscape/portrait mode</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="app-download">
+            <div class="download-container">
+                <h2>Available for Android</h2>
+                <p class="download-subtitle">Get the latest version on Play Store or download APK directly</p>
+                
+                <div class="download-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=com.cesarrfernandes.ruby07" class="btn download">
+                        <img src="assets/img/google-play-badge.png" alt="Available on Google Play" class="store-badge">
+                    </a>
+                    <a href="https://github.com/cesarrf15/ruby-app/releases" class="btn secondary">
+                        <span class="icon">📦</span> Download APK
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Documentation</h4>
+                    <a href="en/manual.html">User Manual</a>
+                    <a href="en/teoria.html">Theoretical Foundations</a>
+                    <a href="en/api.html">API (for developers)</a>
+                </div>
+                
+                <div class="link-group">
+                    <h4>Support</h4>
+                    <a href="https://github.com/cesarrf15/ruby-app/issues">Report Issue</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                </div>
+                
+                <div class="link-group">
+                    <h4>Repository</h4>
+                    <a href="https://github.com/cesarrf15/ruby-app">Source Code</a>
+                    <a href="https://github.com/cesarrf15/ruby-app/releases">Version History</a>
+                    <a href="https://github.com/cesarrf15/ruby-app/wiki">Wiki</a>
+                </div>
+            </div>
+            
+            <div class="footer-credits">
+                <div class="credits-content">
+                    <img src="assets/img/ruby-icon.svg" alt="Ruby Pressure Icon" class="footer-logo">
+                    <div>
+                        <p>&copy; 2023 Ruby Pressure Calculator</p>
+                        <p>Developed by <a href="https://github.com/cesarrf15" target="_blank">César Fernandes</a></p>
+                        <p class="version">Current version: v2.1.0</p>
+                    </div>
+                </div>
+                
+                <div class="language-selector">
+                    <span class="icon">🌐</span>
+                    <select aria-label="Select language">
+                        <option value="pt">Português</option>
+                        <option value="en" selected>English</option>
+                        <option value="es">Español</option>
+                        <option value="ru">Русский</option>
+                        <option value="zh">中文</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/ruby-app-docs/assets/js/app.js"></script>
+</body>
+</html>
