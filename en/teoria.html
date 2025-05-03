@@ -1,1 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theoretical Foundations | Ruby Pressure Calculator</title>
+    
+    <!-- SEO and Metatags -->
+    <meta name="description" content="Complete theoretical basis for pressure calibration using ruby spectroscopy">
+    <meta name="keywords" content="Raman spectroscopy, ruby, pressure calibration, high-pressure physics">
+    
+    <!-- Preloads -->
+    <link rel="preload" href="../assets/css/main.css" as="style">
+        
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    
+    <!-- MathJax Config -->
+    <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    startup: {
+      ready: () => {
+        MathJax.startup.defaultReady();
+        // Force update when theme changes
+        document.addEventListener('themeChanged', () => {
+          MathJax.typesetPromise();
+        });
+      }
+    },
+    options: {
+      renderActions: {
+        addMenu: [0, '', '']
+      }
+    }
+  };
+  </script>
 
+  <script src="../assets/js/app.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+</head>
+
+<body class="theory-page">
+    
+    <!-- Button should be identical to other pages -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+    <span id="theme-icon" class="theme-icon">🌙</span>
+  </button>
+    
+    <a class="skip-link" href="#main-content">Skip to theoretical content</a>
+    
+    <header class="theory-header">
+        <div class="header-container">
+            <h1>Theoretical Foundations</h1>
+            <p class="subtitle">Scientific Basis of Ruby Pressure Calculator</p>
+            
+            <nav class="breadcrumb" aria-label="Structural navigation">
+                <ol>
+                    <li><a href="../en/index.html">Home</a></li>
+                    <li><a href="manual.html">Manual</a></li>
+                    <li aria-current="page">Theoretical Foundations</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <nav class="theory-nav" aria-label="Section navigation">
+            <ul>
+                <li><a href="#ruby-calibration" class="nav-link">Ruby Calibration</a></li>
+                <li><a href="#equations" class="nav-link">Equation System</a></li>
+                <li><a href="#assumptions" class="nav-link">Assumptions</a></li>
+                <li><a href="#references" class="nav-link">References</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="theory-container">
+        <article>
+            <!-- Section 1: Ruby Calibration -->
+            <section id="ruby-calibration" class="theory-section">
+                <h2>1. Ruby Calibration Principle</h2>
+                
+                <div class="theory-content">
+                    <div class="text-content">
+                        <p>The ruby calibration method is based on the pressure dependence of the R₁ and R₂ fluorescence line shifts in ruby (Al₂O₃:Cr³⁺). This technique, initially developed by <strong>Mao and Bell (1978)</strong>, exploits the quasi-linear relationship between pressure and Raman peak shift.</p>
+                        
+                        <div class="key-concept">
+                            <h3>Physical Mechanism</h3>
+                            <p>Hydrostatic pressure application alters the crystal field around Cr³⁺ ions, modifying electronic energy levels and consequently the emission wavelength.</p>
+                        </div>
+                    </div>
+                    
+                    <figure class="theory-figure">
+                        <div class="equation-container" id="main-equation">
+                            $$ \lambda_p = \lambda_0 \left(1 + \frac{aP}{b}\right)^{1/a} $$
+                        </div>
+                        <figcaption>Fundamental ruby calibration equation</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="parameters-table">
+                    <table>
+                        <caption>Calibration Equation Parameters</caption>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Description</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                                <th>Uncertainty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$ \lambda_0 $</td>
+                                <td>Zero-pressure wavelength</td>
+                                <td>694.22</td>
+                                <td>nm</td>
+                                <td>±0.03 nm</td>
+                            </tr>
+                            <tr>
+                                <td>$ a $</td>
+                                <td>Pressure exponent</td>
+                                <td>7.665</td>
+                                <td>dimensionless</td>
+                                <td>±0.008</td>
+                            </tr>
+                            <tr>
+                                <td>$ b $</td>
+                                <td>Pressure coefficient</td>
+                                <td>1904</td>
+                                <td>GPa</td>
+                                <td>±12 GPa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="experimental-notes">
+                    <h3>Experimental Considerations</h3>
+                    <ul>
+                        <li>Equation is valid for <strong>hydrostatic</strong> or <strong>quasi-hydrostatic</strong> conditions</li>
+                        <li>Room temperature (20-25°C)</li>
+                        <li>Pressure range: 0-500 GPa</li>
+                        <li>Thermal dependence: ~0.007 nm/°C (should be compensated in non-isothermal experiments)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 2: Equation System -->
+            <section id="equations" class="theory-section">
+                <h2>2. Complete Equation System</h2>
+                
+                <div class="equation-system">
+                    <div class="equation-card">
+                        <h3>Pressure → Wavenumber</h3>
+                        <div class="equation">
+                            $$ \lambda_p = \lambda_0 \left(1 + \frac{aP}{b}\right)^{1/a} $$
+                            $$ \nu = \left(\frac{1}{\lambda_{exc}} - \frac{1}{\lambda_p}\right) \times 10^7 $$
+                        </div>
+                        <div class="variables">
+                            <p>Where:</p>
+                            <ul>
+                                <li>$ \nu $: Raman wavenumber (cm⁻¹)</li>
+                                <li>$ \lambda_{exc} $: Excitation laser wavelength (nm)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="equation-card">
+                        <h3>Wavenumber → Pressure</h3>
+                        <div class="equation">
+                            $$ \lambda_p = \frac{1}{\frac{1}{\lambda_{exc}} - \frac{\nu}{10^7}} $$
+                            $$ P = \frac{b}{a} \left[\left(\frac{\lambda_p}{\lambda_0}\right)^a - 1\right] $$
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="derivation">
+                    <h3>Mathematical Derivation</h3>
+                    <div class="derivation-steps">
+                        <p>Starting from the equation of state:</p>
+                        <div class="step">
+                            $$ \frac{\Delta\lambda}{\lambda_0} = \left(1 + \frac{aP}{b}\right)^{1/a} - 1 $$
+                        </div>
+                        <p>For small pressures (P &lt; 10 GPa), linear approximation:</p>
+                        <div class="step">
+                            $$ \Delta\lambda \approx \frac{\lambda_0}{a} \ln\left(1 + \frac{aP}{b}\right) $$
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Assumptions and Limitations -->
+            <section id="assumptions" class="theory-section">
+                <h2>3. Assumptions and Limitations</h2>
+                
+                <div class="assumptions-grid">
+                    <div class="assumption-card">
+                        <h3>Hydrostaticity</h3>
+                        <p>Calibration assumes hydrostatic conditions. In non-hydrostatic media, deviations up to 5% may occur.</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>Thermal Effects</h3>
+                        <p>Temperature variations affect $ \lambda_0 $. Thermal correction is not implemented in the application.</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>Ruby Homogeneity</h3>
+                        <p>Impurities or crystal defects may alter pressure response.</p>
+                    </div>
+                    
+                    <div class="assumption-card">
+                        <h3>Validity Range</h3>
+                        <p>Above 150 GPa, the equation may underestimate actual pressure by ~3-7%.</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-chart">
+                    <h3>Comparison with Other Standards</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Range (GPa)</th>
+                                <th>Accuracy</th>
+                                <th>Advantages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ruby (R₁)</td>
+                                <td>0-500</td>
+                                <td>±0.5%</td>
+                                <td>Non-destructive, high resolution</td>
+                            </tr>
+                            <tr>
+                                <td>XRD</td>
+                                <td>0-300</td>
+                                <td>±1%</td>
+                                <td>Direct, absolute</td>
+                            </tr>
+                            <tr>
+                                <td>Diamond</td>
+                                <td>0-200</td>
+                                <td>±2%</td>
+                                <td>For high temperatures</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 4: References -->
+            <section id="references" class="theory-section">
+                <h2>4. Bibliographic References</h2>
+                
+                <div class="references-list">
+                    <ol class="references">
+                        <li>
+                            Mao, H.K., Xu, J., & Bell, P.M. (1986). <em>Calibration of the ruby pressure gauge to 800 kbar under quasi-hydrostatic conditions</em>. Journal of Geophysical Research, 91(B5), 4673-4676.
+                            <span class="doi">DOI: 10.1029/JB091iB05p04673</span>
+                        </li>
+                        <li>
+                            Dewaele, A., et al. (2004). <em>Quasihydrostatic equation of state of iron above 2 Mbar</em>. Physical Review Letters, 93(21), 215504.
+                        </li>
+                        <li>
+                            Holzapfel, W.B. (2003). <em>Refinements in the ruby pressure scale</em>. Journal of Applied Physics, 93(3), 1813-1818.
+                        </li>
+                    </ol>
+                    
+                    <div class="additional-resources">
+                        <h3>Additional Resources</h3>
+                        <ul>
+                            <li><a href="https://www.mindat.org/min-3486.html" target="_blank">Ruby mineralogical properties</a></li>
+                            <li><a href="https://www.nist.gov/pml" target="_blank">NIST standards for high pressure</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer class="theory-footer">
+        <div class="footer-content">
+            <div class="footer-actions">
+                <a href="../en/manual.html" class="footer-button">Back to Manual</a>
+                <a href="../index.html" class="footer-button">Home Page</a>
+            </div>
+            
+            <div class="footer-meta">
+                <p>Last theoretical update: <time datetime="2023-11-20">11/20/2023</time></p>
+                <p>Content version: 2.1.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    
+    <script>
+        // Section navigation control
+        document.querySelectorAll('.theory-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without reloading
+                history.pushState(null, null, targetId);
+            });
+        });
+    </script>
+</body>
+</html>
