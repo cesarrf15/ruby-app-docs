@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 高级主题控制 -->
+    <script>
+        // 渲染前立即应用主题
+        (function(){
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+            
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            window.currentTheme = isDark ? 'dark' : 'light';
+            document.documentElement.style.setProperty('--light-display', isDark ? 'none' : 'block');
+            document.documentElement.style.setProperty('--dark-display', isDark ? 'block' : 'none');
+        })();
+    </script>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完整手册 | Ruby Pressure Calculator</title>
+    
+    <!-- SEO和元数据 -->
+    <meta name="description" content="Ruby Pressure Calculator完整使用手册，实现压力与拉曼波数的精确转换">
+    <meta name="keywords" content="红宝石测压, DAC计算, 拉曼光谱, 用户手册">
+    
+    <!-- 预加载 -->
+    <link rel="preload" href="/ruby-app-docs/assets/css/main.css" as="style">
+    <link rel="preload" href="/ruby-app-docs/assets/js/app.js" as="script">
+    
+    <!-- 样式表 -->
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/manual.css">
+    
+    <!-- 网站图标 -->
+    <link rel="icon" href="/ruby-app-docs/assets/img/favicon.ico" sizes="any">
+    <link rel="icon" href="/ruby-app-docs/assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/ruby-app-docs/assets/img/apple-touch-icon.png">
+    
+    <style>
+        /* 主题敏感图片的平滑过渡 */
+        .theme-sensitive-img {
+            transition: opacity 0.4s ease;
+        }
+        .theme-sensitive-img[data-theme="light"] {
+            display: var(--light-display, block);
+        }
+        .theme-sensitive-img[data-theme="dark"] {
+            display: var(--dark-display, none);
+        }
+        .dark-mode .theme-sensitive-img[data-theme="light"] {
+            display: none;
+        }
+        .dark-mode .theme-sensitive-img[data-theme="dark"] {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="manual-page">
+    <!-- 主题切换按钮 -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="切换主题" aria-live="polite">
+        <span id="theme-icon" class="theme-icon">🌙</span>
+    </button>
+
+    <header class="manual-header">
+        <div class="header-container">
+            <h1>红宝石测压计算器</h1>
+            <p class="subtitle">用户完整手册</p>
+            
+            <nav class="breadcrumb" aria-label="导航路径">
+                <ol>
+                    <li><a href="../zh/index.html">首页</a></li>
+                    <li aria-current="page">手册</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <nav class="activity-nav" aria-label="主导航">
+            <ul>
+                <li><a href="#main-activity" class="nav-btn active" data-section="main">主界面</a></li>
+                <li><a href="#pressure-converter" class="nav-btn" data-section="pressure">压力→波数</a></li>
+                <li><a href="#wavenumber-converter" class="nav-btn" data-section="wavenumber">波数→压力</a></li>
+                <li><a href="#data-management" class="nav-btn" data-section="data">数据管理</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="manual-container">
+        <!-- 主界面部分 -->
+        <section id="main-activity" class="activity-section visible">
+            <h2>主界面</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="screenshot-container">
+                        <img src="/ruby-app-docs/assets/img/screenshots/main-activity/light/full.webp" 
+                             alt="浅色模式下的主界面显示两种转换模式"
+                             class="theme-sensitive-img"
+                             data-theme="light"
+                             loading="lazy">
+                        <img src="/ruby-app-docs/assets/img/screenshots/main-activity/dark/full.webp" 
+                             alt="深色模式下的主界面"
+                             class="theme-sensitive-img"
+                             data-theme="dark"
+                             loading="lazy">
+                    </div>
+                    
+                    <div class="feature-details">
+                        <h3>基本导航</h3>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="icon">🔄</span>
+                                <strong>切换模式：</strong>点击主按钮可在转换功能间切换
+                            </li>
+                            <li>
+                                <span class="icon">🌓</span>
+                                <strong>视觉主题：</strong>右上角按钮切换浅色/深色模式
+                            </li>
+                            <li>
+                                <span class="icon">🌐</span>
+                                <strong>语言：</strong>地球图标可选择5种可用语言
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feature-card reverse">
+                    <div class="feature-details">
+                        <h3>顶部控制栏</h3>
+                        <div class="controls-detail">
+                            <div class="screenshot-container">
+                                <img src="/ruby-app-docs/assets/img/screenshots/main-activity/light/controls.webp" 
+                                     alt="浅色模式下的控制栏细节"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="/ruby-app-docs/assets/img/screenshots/main-activity/dark/controls.webp" 
+                                     alt="深色模式下的控制栏细节"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <ol class="controls-list">
+                                <li><strong>主题：</strong>切换浅色/深色配色</li>
+                                <li><strong>语言：</strong>语言选择菜单</li>
+                                <li><strong>帮助：</strong>快速访问本手册</li>                                
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 压力转波数部分 -->
+        <section id="pressure-converter" class="activity-section">
+            <h2>压力到波数转换</h2>
+            
+            <div class="converter-grid">
+                <div class="converter-details">
+                    <h3>详细工作原理</h3>
+                    
+                    <div class="parameter-section">
+                        <h4>激光设置</h4>
+                        <div class="parameter-content">
+                            <div class="screenshot-container">
+                                <img src="/ruby-app-docs/assets/img/screenshots/pressure-converter/light/laser-selection.webp" 
+                                     alt="浅色模式下的激光选择菜单"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="/ruby-app-docs/assets/img/screenshots/pressure-converter/dark/laser-selection.webp" 
+                                     alt="深色模式下的激光选择菜单"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <div class="parameter-desc">
+                                <p>选择您实验中使用的激光波长：</p>
+                                <ul>
+                                    <li><strong>488nm：</strong>氩离子激光</li>
+                                    <li><strong>514.5nm：</strong>红宝石测压黄金标准</li>
+                                    <li><strong>532nm：</strong>固态激光</li>
+                                    <li><strong>633nm：</strong>氦氖激光</li>
+                                    <li><strong>785nm：</strong>特殊测量使用</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="parameter-section">
+                        <h4>压力输入</h4>
+                        <div class="parameter-content reverse">
+                            <div class="parameter-desc">
+                                <p>输入<strong>吉帕斯卡(GPa)</strong>为单位的压力值：</p>
+                                <ul>
+                                    <li>有效范围：0至500 GPa</li>
+                                    <li>可使用点或逗号作为小数分隔符</li>
+                                    <li>计算自动实时进行</li>
+                                </ul>
+                            </div>
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/pressure-converter/light/input-field.webp" 
+                                     alt="浅色模式下的压力输入框"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/pressure-converter/dark/input-field.webp" 
+                                     alt="深色模式下的压力输入框"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="converter-features">
+                    <h3>高级功能</h3>
+                    
+                    <div class="feature-box">
+                        <h4>校准调整</h4>
+                        <div class="feature-content">
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/pressure-converter/light/offset-adjust.webp" 
+                                     alt="浅色模式下的微调控制"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/pressure-converter/dark/offset-adjust.webp" 
+                                     alt="深色模式下的微调控制"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <div class="feature-desc">
+                                <p>通过微调补偿仪器差异：</p>
+                                <ol>
+                                    <li>选择所需激光</li>
+                                    <li>使用<strong>+</strong>和<strong>-</strong>按钮调整</li>
+                                    <li>数值按激光类型自动保存</li>
+                                </ol>
+                                <p class="note">注：默认调整值为0.0 cm⁻¹</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 波数转压力部分 -->
+        <section id="wavenumber-converter" class="activity-section">
+            <h2>波数到压力转换</h2>
+            
+            <div class="converter-grid">
+                <div class="converter-details">
+                    <h3>详细工作原理</h3>
+                    
+                    <div class="parameter-section">
+                        <h4>波数输入</h4>
+                        <div class="parameter-content">
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/wavenumber-converter/light/input-field.webp" 
+                                     alt="浅色模式下的输入框"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/wavenumber-converter/dark/input-field.webp" 
+                                     alt="深色模式下的输入框"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                                 
+                            <div class="parameter-desc">
+                                <p>输入<strong>cm⁻¹</strong>为单位的拉曼波数值：</p>
+                                <ul>
+                                    <li>有效范围根据所选激光而变化</li>
+                                    <li>785nm激光可接受负值</li>
+                                    <li>计算自动实时进行</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="converter-features">
+                    <h3>自动验证</h3>
+                    
+                    <div class="feature-box">
+                        <div class="feature-content reverse">
+                            <div class="feature-desc">
+                                <p>应用程序自动检查：</p>
+                                <ul>
+                                    <li>数值是否在可能范围内</li>
+                                    <li>是否会产生有效压力值(0-500 GPa)</li>
+                                    <li>对无效值显示明确提示</li>
+                                </ul>
+                            </div>
+                            <div class="screenshot-container">
+                                <img src="../assets/img/screenshots/wavenumber-converter/light/validation.webp" 
+                                     alt="浅色模式下的验证信息"
+                                     class="theme-sensitive-img"
+                                     data-theme="light"
+                                     loading="lazy">
+                                <img src="../assets/img/screenshots/wavenumber-converter/dark/validation.webp" 
+                                     alt="深色模式下的验证信息"
+                                     class="theme-sensitive-img"
+                                     data-theme="dark"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 数据管理部分 -->
+        <section id="data-management" class="activity-section">
+            <h2>数据管理</h2>
+            
+            <div class="data-features">
+                <div class="data-card">
+                    <h3>计算历史</h3>
+                    <div class="data-content">
+                        <div class="screenshot-container">
+                            <img src="../assets/img/screenshots/data-management/light/history.webp" 
+                                 alt="浅色模式下的计算历史"
+                                 class="theme-sensitive-img"
+                                 data-theme="light"
+                                 loading="lazy">
+                            <img src="../assets/img/screenshots/data-management/dark/history.webp" 
+                                 alt="深色模式下的计算历史"
+                                 class="theme-sensitive-img"
+                                 data-theme="dark"
+                                 loading="lazy">
+                        </div>
+                        
+                        <div class="data-desc">
+                            <ul>
+                                <li>最多存储50次最近转换</li>
+                                <li>格式：压力(GPa) → 波数(cm⁻¹)</li>
+                                <li>重启应用时自动清空</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <h3>导入/导出</h3>
+                    <div class="data-content reverse">
+                        <div class="data-desc">
+                            <ul>
+                                <li><strong>导出：</strong>保存为.txt文件到下载目录</li>
+                                <li><strong>导入：</strong>从之前.txt文件加载数据</li>
+                                <li>格式兼容其他分析软件</li>
+                            </ul>
+                        </div>
+                        <div class="screenshot-container">
+                            <img src="../assets/img/screenshots/data-management/light/import-export.webp" 
+                                 alt="浅色模式下的导入导出选项"
+                                 class="theme-sensitive-img"
+                                 data-theme="light"
+                                 loading="lazy">
+                            <img src="../assets/img/screenshots/data-management/dark/import-export.webp" 
+                                 alt="深色模式下的导入导出选项"
+                                 class="theme-sensitive-img"
+                                 data-theme="dark"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="manual-footer">
+        <div class="footer-content">
+            <div class="footer-actions">
+                <a href="teoria.html" class="footer-button">理论基础</a>
+                <a href="../index.html" class="footer-button">返回首页</a>
+            </div>
+            
+            <div class="footer-meta">
+                <p>应用版本：2.1.0</p>
+                <p>最后更新：<time datetime="2023-11-20">2023年11月20日</time></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="/ruby-app-docs/assets/js/app.js"></script>
+    <script>
+    // 完整的主题管理系统
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // 1. 初始配置
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        // 2. 根据当前主题更新图标
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeToggle.setAttribute('aria-label', theme === 'dark' ? 
+                                  '切换到浅色模式' : '切换到深色模式');
+        }
+        
+        // 3. 主题切换器
+        themeToggle.addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            const newTheme = isDark ? 'dark' : 'light';
+            
+            // 更新存储和变量
+            localStorage.setItem('theme', newTheme);
+            window.currentTheme = newTheme;
+            
+            // 更新界面
+            updateThemeIcon(newTheme);
+            
+            // 更新CSS属性
+            document.documentElement.style.setProperty('--light-display', isDark ? 'none' : 'block');
+            document.documentElement.style.setProperty('--dark-display', isDark ? 'block' : 'none');
+            
+            // 触发事件通知响应式组件
+            document.dispatchEvent(new CustomEvent('themeChanged', { 
+                detail: { theme: newTheme }
+            }));
+        });
+        
+        // 4. 监听系统主题变化
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) { // 仅在没有用户偏好时响应
+                const newTheme = e.matches ? 'dark' : 'light';
+                document.documentElement.classList.toggle('dark-mode', e.matches);
+                updateThemeIcon(newTheme);
+                document.documentElement.style.setProperty('--light-display', e.matches ? 'none' : 'block');
+                document.documentElement.style.setProperty('--dark-display', e.matches ? 'block' : 'none');
+            }
+        });
+        
+        // 5. 初始化
+        updateThemeIcon(currentTheme);
+        
+        // 6. 章节导航
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = this.getAttribute('href');
+                
+                // 隐藏所有章节
+                document.querySelectorAll('.activity-section').forEach(section => {
+                    section.classList.remove('visible');
+                });
+                
+                // 显示目标章节
+                document.querySelector(targetSection).classList.add('visible');
+                
+                // 更新导航状态
+                document.querySelectorAll('.nav-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // 平滑滚动
+                document.querySelector(targetSection).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>
