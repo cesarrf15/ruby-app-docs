@@ -16,6 +16,36 @@
         });
     };
 
+
+
+    // Seletor de idiomas
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageSelector = document.querySelector('.language-selector select');
+        
+        if (languageSelector) {
+            languageSelector.addEventListener('change', function() {
+                const selectedLanguage = this.value;
+                const currentPath = window.location.pathname;
+                
+                // Remove a linguagem atual do path (se existir)
+                const pathParts = currentPath.split('/');
+                const isLanguageInPath = ['pt', 'en', 'es', 'ru', 'zh'].includes(pathParts[1]);
+                
+                // Monta o novo URL
+                let newPath;
+                if (isLanguageInPath) {
+                    pathParts[1] = selectedLanguage;
+                    newPath = pathParts.join('/');
+                } else {
+                    newPath = `/${selectedLanguage}${currentPath}`;
+                }
+                
+                // Redireciona para a nova URL
+                window.location.href = newPath;
+            });
+        }
+    });
+
     // Espera o DOM estar pronto para o restante
     document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.getElementById('theme-toggle');
