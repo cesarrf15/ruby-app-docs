@@ -16,9 +16,9 @@
         });
     };
 
-
-
-    // Seletor de idiomas
+    
+    
+        // Seletor de idiomas corrigido
     document.addEventListener('DOMContentLoaded', function() {
         const languageSelector = document.querySelector('.language-selector select');
         
@@ -27,26 +27,24 @@
                 const selectedLanguage = this.value;
                 const currentPath = window.location.pathname;
                 
-                // Remove a linguagem atual do path (se existir)
-                const pathParts = currentPath.split('/');
-                const isLanguageInPath = ['pt', 'en', 'es', 'ru', 'zh'].includes(pathParts[1]);
+                // Extrai o caminho base (remove a linguagem atual se existir)
+                const basePath = currentPath.replace(/^\/(pt|en|es|ru|zh)\//, '/');
                 
-                // Monta o novo URL
-                let newPath;
-                if (isLanguageInPath) {
-                    pathParts[1] = selectedLanguage;
-                    newPath = pathParts.join('/');
-                } else {
-                    newPath = `/${selectedLanguage}${currentPath}`;
-                }
+                // Monta o novo URL com a estrutura correta
+                const newPath = `/${selectedLanguage}${basePath}`.replace('//', '/');
+                const newUrl = `${window.location.origin}${newPath}`;
                 
                 // Redireciona para a nova URL
-                window.location.href = newPath;
+                window.location.href = newUrl;
             });
+            
+            // Atualiza o valor do seletor com o idioma atual
+            const currentLang = window.location.pathname.split('/')[1];
+            if (['pt', 'en', 'es', 'ru', 'zh'].includes(currentLang)) {
+                languageSelector.value = currentLang;
+            }
         }
-    });
-
-    // Espera o DOM estar pronto para o restante
+    });    // Espera o DOM estar pronto para o restante
     document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
