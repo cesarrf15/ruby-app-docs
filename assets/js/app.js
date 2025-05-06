@@ -14,37 +14,33 @@
         document.querySelectorAll('.theme-sensitive-img').forEach(img => {
             img.style.display = img.dataset.theme === currentTheme ? 'block' : 'none';
         });
-    };
-
-    
-    
-        // Seletor de idiomas corrigido
-    document.addEventListener('DOMContentLoaded', function() {
+    };    
+        
+        document.addEventListener('DOMContentLoaded', function() {
         const languageSelector = document.querySelector('.language-selector select');
         
         if (languageSelector) {
             languageSelector.addEventListener('change', function() {
                 const selectedLanguage = this.value;
-                const currentPath = window.location.pathname;
-                
-                // Extrai o caminho base (remove a linguagem atual se existir)
-                const basePath = currentPath.replace(/^\/(pt|en|es|ru|zh)\//, '/');
-                
-                // Monta o novo URL com a estrutura correta
-                const newPath = `/${selectedLanguage}${basePath}`.replace('//', '/');
-                const newUrl = `${window.location.origin}${newPath}`;
-                
-                // Redireciona para a nova URL
+                // Monta o caminho absoluto correto
+                const newUrl = `/ruby-app-docs/${selectedLanguage}/index.html`;
                 window.location.href = newUrl;
             });
             
-            // Atualiza o valor do seletor com o idioma atual
-            const currentLang = window.location.pathname.split('/')[1];
-            if (['pt', 'en', 'es', 'ru', 'zh'].includes(currentLang)) {
-                languageSelector.value = currentLang;
+            // Atualiza o seletor com o idioma atual
+            const pathParts = window.location.pathname.split('/');
+            const langIndex = pathParts.indexOf('ruby-app-docs') + 1;
+            if (langIndex > 0 && langIndex < pathParts.length) {
+                const currentLang = pathParts[langIndex];
+                if (['pt', 'en', 'es', 'ru', 'zh'].includes(currentLang)) {
+                    languageSelector.value = currentLang;
+                }
             }
         }
-    });    // Espera o DOM estar pronto para o restante
+    });
+
+    
+    // Espera o DOM estar pronto para o restante
     document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
