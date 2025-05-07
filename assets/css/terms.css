@@ -1,4 +1,17 @@
 <style>
+    /* Cabeçalho responsivo ao tema */
+    .terms-header {
+        background: linear-gradient(135deg, 
+            var(--header-primary), 
+            var(--header-secondary));
+        padding: 2rem 0;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--header-text);
+    }
+
+    /* Adicione estas variáveis no :root do seu main.css */
+
     /* Estilos específicos para termos.html */
     .terms-page {
         background-color: var(--bg-color);
