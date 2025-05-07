@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Control Avanzado de Tema -->
+    <script>
+        (function(){
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+            
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            window.currentTheme = isDark ? 'dark' : 'light';
+        })();
+    </script>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
+    
+    <title>Términos de Uso | Calculadora de Presión Ruby</title>
+    
+    <!-- SEO y Metadatos -->
+    <meta name="description" content="Términos de Uso de la Calculadora de Presión Ruby - Aplicación para conversión científica entre presión y espectroscopía Raman">
+    <meta name="keywords" content="términos de uso, presión ruby, condiciones de utilización">
+    
+    <!-- Estilos -->
+    
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/ruby-app-docs/assets/img/favicon.ico">
+</head>
+
+<body class="terms-page">
+    <!-- Botón de Tema Accesible -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema" aria-live="polite">
+        <span id="theme-icon" class="theme-icon">🌙</span>
+    </button>
+
+    <header class="terms-header">
+        <div class="header-container">
+            <h1>Términos de Uso</h1>
+            <p class="subtitle">Calculadora de Presión Ruby</p>
+            
+            <nav class="breadcrumb" aria-label="Navegación estructural">
+                <ol>
+                    <li><a href="/ruby-app-docs/pt/index.html">Inicio</a></li>
+                    <li aria-current="page">Términos de Uso</li>
+                </ol>
+            </nav>
+        </div>
+    </header>
+
+    <main class="terms-container">
+        <section class="terms-section">
+            <h2>1. Aceptación de los Términos</h2>
+            <p>Al utilizar la aplicación Calculadora de Presión Ruby ("Aplicación"), desarrollada por César Fernandes ("Desarrollador"), usted acepta estos Términos de Uso en su totalidad.</p>
+        </section>
+
+        <section class="terms-section">
+            <h2>2. Licencia de Uso</h2>
+            <p>Se concede permiso para el uso personal y no comercial de la Aplicación, sujeto a las siguientes restricciones:</p>
+            <ul class="terms-list">
+                <li>No modificar o copiar los materiales de la Aplicación</li>
+                <li>No utilizar la Aplicación para fines ilegales o no autorizados</li>
+                <li>No realizar ingeniería inversa o intentar extraer el código fuente</li>
+            </ul>
+        </section>
+
+        <section class="terms-section">
+            <h2>3. Exención de Garantías</h2>
+            <p>La Aplicación se proporciona "tal cual" y "según disponibilidad". El Desarrollador no ofrece garantías de:</p>
+            <div class="warning-box">
+                <p>🔴 Precisión absoluta de los cálculos científicos<br>
+                🔴 Disponibilidad continua sin interrupciones<br>
+                🔴 Compatibilidad con todos los dispositivos Android</p>
+            </div>
+        </section>
+
+        <section class="terms-section">
+            <h2>4. Limitación de Responsabilidad</h2>
+            <p>En ningún caso el Desarrollador será responsable por:</p>
+            <ul class="terms-list">
+                <li>Daños directos, indirectos, incidentales o consecuenciales</li>
+                <li>Pérdida de datos o beneficios resultantes del uso de la Aplicación</li>
+                <li>Decisiones técnicas o científicas tomadas en base a los resultados</li>
+            </ul>
+        </section>
+
+        <section class="terms-section">
+            <h2>5. Propiedad Intelectual</h2>
+            <p>Todos los derechos de propiedad intelectual relacionados con la Aplicación, incluyendo pero no limitado a:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="card-icon">💻</div>
+                    <h3>Código fuente</h3>
+                    <p>Licenciado bajo MIT License</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Algoritmos</h3>
+                    <p>Basados en publicaciones científicas</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">🎨</div>
+                    <h3>Diseño</h3>
+                    <p>Propiedad exclusiva del Desarrollador</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="terms-section">
+            <h2>6. Modificaciones</h2>
+            <p>Estos Términos pueden actualizarse periódicamente. La versión más reciente siempre estará disponible en la Aplicación y en el sitio web oficial.</p>
+            <div class="version-box">
+                <p><strong>Versión actual:</strong> 2.1.0<br>
+                <strong>Última actualización:</strong> <time datetime="2023-11-20">20/11/2023</time></p>
+            </div>
+        </section>
+
+        <section class="terms-section">
+            <h2>7. Ley Aplicable</h2>
+            <p>Estos Términos se rigen por las leyes de Brasil. Cualquier disputa se resolverá en el foro de la comarca de residencia del Desarrollador.</p>
+        </section>
+    </main>
+
+    <footer class="terms-footer">
+        <div class="footer-content">
+            <div class="footer-actions">
+                <a href="/ruby-app-docs/pt/privacy.html" class="footer-button">Política de Privacidad</a>
+                <a href="/ruby-app-docs/pt/index.html" class="footer-button">Página de Inicio</a>
+            </div>
+            
+            <div class="footer-meta">
+                <p>&copy; 2023 Calculadora de Presión Ruby</p>
+                <p>Desarrollado por <a href="https://github.com/cesarrf15" target="_blank">César Fernandes</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/ruby-app-docs/assets/js/app.js"></script>
+    
+</body>
+</html>
