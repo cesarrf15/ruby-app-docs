@@ -198,6 +198,19 @@
                 margin-bottom: 2rem;
             }
         }
+
+        /* Garante contraste em ambos os temas */
+        :root {
+            --header-text: #ffffff; /* Branco para ambos os temas */
+        }
+    
+        /* Se precisar de ajustes específicos para tema escuro */
+        .dark-mode .terms-header {
+            background: linear-gradient(135deg, 
+                #2c3e50, 
+                #1a2530);
+        }
+        
     </style>
 </body>
 </html>
