@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Theme control script remains the same -->
+    <!-- Advanced Theme Control -->
+    <script>
+        (function(){
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : systemDark;
+            
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            window.currentTheme = isDark ? 'dark' : 'light';
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/ruby-app-docs/assets/css/main.css">
+    
     <title>Terms of Use | Ruby Pressure Calculator</title>
+    
+    <!-- SEO and Metadata -->
     <meta name="description" content="Terms of Use for Ruby Pressure Calculator - Scientific conversion app between pressure and Raman spectroscopy">
+    <meta name="keywords" content="terms of use, ruby pressure, usage conditions">
+    
+    <!-- Styles -->
+    
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/ruby-app-docs/assets/img/favicon.ico">
 </head>
+
 <body class="terms-page">
+    <!-- Accessible Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" aria-live="polite">
+        <span id="theme-icon" class="theme-icon">🌙</span>
+    </button>
+
     <header class="terms-header">
         <div class="header-container">
             <h1>Terms of Use</h1>
             <p class="subtitle">Ruby Pressure Calculator</p>
-            <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+            
+            <nav class="breadcrumb" aria-label="Structural navigation">
                 <ol>
                     <li><a href="/ruby-app-docs/en/index.html">Home</a></li>
                     <li aria-current="page">Terms of Use</li>
@@ -24,20 +54,92 @@
     <main class="terms-container">
         <section class="terms-section">
             <h2>1. Acceptance of Terms</h2>
-            <p>By using the Ruby Pressure Calculator application ("App"), developed by César Fernandes ("Developer"), you agree to these Terms of Use in their entirety.</p>
+            <p>By using the Ruby Pressure Calculator application ("Application"), developed by César Fernandes ("Developer"), you fully agree to these Terms of Use.</p>
         </section>
 
         <section class="terms-section">
-            <h2>2. License Grant</h2>
-            <p>Permission is granted for personal, non-commercial use of the App, subject to the following restrictions:</p>
+            <h2>2. Usage License</h2>
+            <p>Permission is granted for personal and non-commercial use of the Application, subject to the following restrictions:</p>
             <ul class="terms-list">
-                <li>Do not modify or copy the App's materials</li>
-                <li>Do not use the App for illegal or unauthorized purposes</li>
+                <li>Do not modify or copy the Application materials</li>
+                <li>Do not use the Application for illegal or unauthorized purposes</li>
                 <li>Do not reverse engineer or attempt to extract the source code</li>
             </ul>
         </section>
 
-        <!-- Continue with other sections translated similarly... -->
+        <section class="terms-section">
+            <h2>3. Warranty Disclaimer</h2>
+            <p>The Application is provided "as is" and "as available". The Developer makes no warranties regarding:</p>
+            <div class="warning-box">
+                <p>🔴 Absolute accuracy of scientific calculations<br>
+                🔴 Continuous availability without interruptions<br>
+                🔴 Compatibility with all Android devices</p>
+            </div>
+        </section>
+
+        <section class="terms-section">
+            <h2>4. Liability Limitation</h2>
+            <p>Under no circumstances shall the Developer be liable for:</p>
+            <ul class="terms-list">
+                <li>Direct, indirect, incidental, or consequential damages</li>
+                <li>Data loss or profits resulting from Application use</li>
+                <li>Technical or scientific decisions made based on results</li>
+            </ul>
+        </section>
+
+        <section class="terms-section">
+            <h2>5. Intellectual Property</h2>
+            <p>All intellectual property rights related to the Application, including but not limited to:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="card-icon">💻</div>
+                    <h3>Source code</h3>
+                    <p>Licensed under MIT License</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Algorithms</h3>
+                    <p>Based on scientific publications</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-icon">🎨</div>
+                    <h3>Design</h3>
+                    <p>Exclusive property of the Developer</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="terms-section">
+            <h2>6. Modifications</h2>
+            <p>These Terms may be updated periodically. The latest version will always be available in the Application and on the official website.</p>
+            <div class="version-box">
+                <p><strong>Current version:</strong> 2.1.0<br>
+                <strong>Last update:</strong> <time datetime="2023-11-20">11/20/2023</time></p>
+            </div>
+        </section>
+
+        <section class="terms-section">
+            <h2>7. Governing Law</h2>
+            <p>These Terms are governed by Brazilian law. Any disputes shall be resolved in the jurisdiction of the Developer's residence.</p>
+        </section>
     </main>
+
+    <footer class="terms-footer">
+        <div class="footer-content">
+            <div class="footer-actions">
+                <a href="/ruby-app-docs/en/privacy.html" class="footer-button">Privacy Policy</a>
+                <a href="/ruby-app-docs/en/index.html" class="footer-button">Home Page</a>
+            </div>
+            
+            <div class="footer-meta">
+                <p>&copy; 2023 Ruby Pressure Calculator</p>
+                <p>Developed by <a href="https://github.com/cesarrf15" target="_blank">César Fernandes</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/ruby-app-docs/assets/js/app.js"></script>
+    
 </body>
 </html>
