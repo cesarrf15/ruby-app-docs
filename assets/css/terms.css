@@ -1,1 +1,59 @@
-
+<style>
+    /* Estilos específicos para termos.html */
+    .terms-page {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+    
+    .terms-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 2rem 0;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: white;
+    }
+    
+    .terms-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1.5rem 3rem;
+    }
+    
+    .terms-section {
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .terms-list {
+        padding-left: 1.5rem;
+        margin: 1rem 0;
+    }
+    
+    .warning-box {
+        background-color: rgba(255, 213, 0, 0.2);
+        border-left: 4px solid #ffd500;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 0 4px 4px 0;
+    }
+    
+    .version-box {
+        background-color: rgba(0, 123, 255, 0.1);
+        padding: 1rem;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 1rem;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+        .terms-container {
+            padding: 0 1rem 2rem;
+        }
+        .terms-section {
+            margin-bottom: 2rem;
+        }
+    }
+</style>
