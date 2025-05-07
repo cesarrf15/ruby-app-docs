@@ -142,75 +142,35 @@
     <!-- Scripts -->
     <script src="/ruby-app-docs/assets/js/app.js"></script>
     <style>
-        /* Estilos específicos para a página de termos */
-        .terms-page {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .terms-header {
-            background: var(--header-gradient);
-            padding: 2rem 0;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .terms-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        
-        .terms-section {
-            margin-bottom: 3rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .terms-list {
-            padding-left: 1.5rem;
-            margin: 1rem 0;
-        }
-        
-        .terms-list li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .warning-box {
-            background-color: var(--warning-bg);
-            border-left: 4px solid var(--warning-border);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .version-box {
-            background-color: var(--info-bg);
-            padding: 1rem;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-        
-        @media (max-width: 768px) {
-            .terms-section {
-                margin-bottom: 2rem;
-            }
-        }
+    /* Cabeçalho responsivo ao tema */
+    .terms-header {
+        background: linear-gradient(135deg, 
+            var(--header-primary, #4a6bdf), 
+            var(--header-secondary, #6941c7));
+        padding: 2rem 0;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-        /* Garante contraste em ambos os temas */
-        :root {
-            --header-text: #ffffff; /* Branco para ambos os temas */
-        }
-    
-        /* Se precisar de ajustes específicos para tema escuro */
-        .dark-mode .terms-header {
-            background: linear-gradient(135deg, 
-                #2c3e50, 
-                #1a2530);
-        }
-        
-    </style>
+    .terms-header h1,
+    .terms-header .subtitle,
+    .terms-header .breadcrumb a {
+        color: var(--header-text, #ffffff);
+    }
+
+    .terms-header .breadcrumb li[aria-current="page"] {
+        color: var(--header-text-current, rgba(255, 255, 255, 0.8));
+    }
+
+    /* Fallback para caso as variáveis não existam */
+    .dark-mode .terms-header {
+        background: linear-gradient(135deg, #2c3e50, #1a2530);
+    }
+    .dark-mode .terms-header h1,
+    .dark-mode .terms-header .subtitle,
+    .dark-mode .breadcrumb a {
+        color: #f0f0f0;
+    }
+</style>
 </body>
 </html>
